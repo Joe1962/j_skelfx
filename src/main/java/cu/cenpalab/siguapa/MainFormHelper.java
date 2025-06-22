@@ -41,7 +41,7 @@ import javafx.scene.layout.VBox;
  *
  * @author joe1962
  */
-public class mainFormHelper {
+public class MainFormHelper {
 
 	public void setupToolBars(BorderPane MainPane, VBox tlbLeft, VBox tlbRight) {
 		tlbLeft.setStyle(CONSTS.cssEtchedBorder);

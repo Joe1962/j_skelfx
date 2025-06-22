@@ -14,15 +14,16 @@ import static cu.cenpalab.siguapa.global.GLOBAL.queryKnownOS;
 import cu.cenpalab.siguapa.global.RunTime;
 import static cu.cenpalab.siguapa.preferences.CLS_Preferences.loadConfigJSON;
 import static cu.cenpalab.siguapa.preferences.CLS_Preferences.saveConfigJSON;
+import cu.cenpalab.siguapa.preferences.db.CLS_DBPrefs;
 import cu.jsoft.j_loginfx.SUB_Protect;
 import static cu.jsoft.j_utilsfxlite.global.CONSTS.NEW_LINE;
 import static cu.jsoft.j_utilsfxlite.global.FLAGS.isDEBUG;
 import static cu.jsoft.j_utilsfxlite.global.FLAGS.setBEEPAVAILABLE;
 import cu.jsoft.j_utilsfxlite.networking.SingleInstance;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorOKFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorYesNoFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningOKFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningYesNoFX;
+import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.SimpleDialog;
 import cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.echoln;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.setupBeep;
@@ -158,7 +159,7 @@ public class MainForm extends Application {
 		primaryStage.setMaximized(WINDOWGEOM.isWindowMaximized());
 
 		// Set up main toolbars, module buttons, center panel contents (module panels):
-		mainFormHelper GUIHelper = new mainFormHelper();
+		MainFormHelper GUIHelper = new MainFormHelper();
 		GLOBAL.tlbLeft = new VBox();
 		GLOBAL.tlbRight = new VBox();
 		GUIHelper.prepHomeButtons(GLOBAL.MainController, GLOBAL.tlbLeft, GLOBAL.tlbRight);
@@ -183,24 +184,30 @@ public class MainForm extends Application {
 			}
 		}
 
+		// React to DB connection errors:
+		if (FLAGS.isERR_NO_DB()) {
+			String title = "AVISO";
+			String header = "Revise la configuración del " + AppInfo.getTITLE() + ":";
+			String content = "No hay base de datos configurada..." + "\n" + "Se mostrará el diálogo de configuración de la BD," + "\n" + "posteriormente debe reiniciar el sistema " + AppInfo.getTITLE();
+			MsgWarningOKFX(null, title, header, content);
+			// Go to DB config...
+			doDBConfig();
+		}
+		if (FLAGS.isERR_DB_CONN()) {
+			String title = "AVISO";
+			String header = "Revise la configuración del " + AppInfo.getTITLE() + ":";
+			String content = "Ocurrió una excepción al tratar de conectar a la base de datos...";
+			MsgWarningOKFX(GLOBAL.MainStage, title, header, content);
+			// Go to DB config...
+			doDBConfig();
+		}
+
 		// Show login dialog:
 		Login();
 
 		// Show main window:
 		GLOBAL.MainController.doInit();			// Need this as the controller is not initialized because we are not using fxml for main window...
 		primaryStage.show();
-
-		// React to DB connection errors:
-		if (FLAGS.isERR_NO_DB()) {
-			String header = "Revise la configuración del HJ-RMSFX-NG:";
-			String content = "No hay base de datos configurada...";
-			MsgErrorOKFX(GLOBAL.MainStage, null, header, content);
-		}
-		if (FLAGS.isERR_DB_CONN()) {
-			String header = "Revise la configuración del HJ-RMSFX-NG:";
-			String content = "Ocurrió una excepción al tratar de conectar a la base de datos...";
-			MsgErrorOKFX(GLOBAL.MainStage, null, header, content);
-		}
 
 		// Enable sensitive (module) buttons on successful login:
 		// TODO: implement granular user permissions:
@@ -419,6 +426,13 @@ public class MainForm extends Application {
 			return 2;
 		}
 		return 0;
+	}
+
+	private void doDBConfig() throws IOException {
+		CLS_DBPrefs MyDBPrefs = new CLS_DBPrefs();
+		SimpleDialog("Configure al menos 1 base de datos...", MyDBPrefs.getDBNode(), 640, 480);
+		Platform.exit();
+		System.exit(66);
 	}
 
 	private void Login() throws IOException {
