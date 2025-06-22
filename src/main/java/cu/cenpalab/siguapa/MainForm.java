@@ -420,7 +420,7 @@ public class MainForm extends Application {
 		} catch (SQLException ex) {
 			FLAGS.setDBCONNECTED(false);
 			Logger.getLogger(GLOBAL.MainClass.getName()).log(Level.SEVERE, null, ex);
-			GLOBAL.DBErrorDesc = ex.getLocalizedMessage();
+			GLOBAL.DBErrorDesc = ex.getLocalizedMessage(); 
 			GLOBAL.DBException = ex;
 			return 2;
 		}
@@ -429,9 +429,9 @@ public class MainForm extends Application {
 
 	private void doDBConfig() throws IOException {
 		CLS_DBPrefs MyDBPrefs = new CLS_DBPrefs();
-		SimpleDialog("Configure al menos 1 base de datos...", MyDBPrefs.getDBNode(), 640, 480);
+		SimpleDialog("SIGUAPA", MyDBPrefs.getDBNode(), 640, 480);
 		Platform.exit();
-		System.exit(66);
+		System.exit(0);
 	}
 
 	private void Login() throws IOException {

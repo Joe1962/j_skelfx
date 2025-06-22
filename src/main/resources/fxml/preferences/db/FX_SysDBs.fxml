@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TitledPane id="tipDB" fx:id="tipDB" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="800.0" text="Configuración - Base de datos" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.cenpalab.siguapa.preferences.db.FX_SysDBsController">
+<TitledPane id="tipDB" fx:id="tipDB" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" text="Configuración - Base de datos" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.cenpalab.siguapa.preferences.db.FX_SysDBsController">
 	<content>
-		<GridPane minHeight="0.0" minWidth="0.0">
+		<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
 			</columnConstraints>
