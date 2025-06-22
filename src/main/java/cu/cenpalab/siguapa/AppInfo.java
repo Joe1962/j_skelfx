@@ -20,7 +20,7 @@ public class AppInfo {
 	private static final String VERSION_BUILD = "000";
 	// Development versioning:
 	private static final String VERSION = "1.0.0";
-	private static final String BUILD = "250618.01";
+	private static final String BUILD = "250622.01";
 
 	/**
 	 * @return the TITLE
