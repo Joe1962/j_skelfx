@@ -1,0 +1,697 @@
+
+/* 1em = 12 pixel
+ * 0.33333em = 4 pixel 
+ * 1.33333em = 16 pixel 
+ */
+
+ .root {
+	-my-background: #EEE;
+	/*-fx-font: 11 Tahoma;*/
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Root-Pane                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+.root-pane{
+	/*-sfx-decorated: false;*/
+    -fx-border-image-source: url("../images/rootPaneBorder.png");
+    -fx-border-image-insets: 12; /*shadow-size;*/
+    -fx-border-image-slice: 4 4 4 4 fill;
+    -fx-border-image-width: 4 4 4 4;
+    -fx-background-color: transparent;    
+    -fx-effect: dropshadow(three-pass-box, #808080, 8, 0.005, 0, 0);        /* size: shadowSize/2+2 */
+}
+
+.root-pane:focused, .root-pane:selected{
+    -fx-effect: dropshadow(three-pass-box, #555, 14, 0.01, 0, 0);  /* size: shadowSize+2 */
+    -fx-border-image-source: url("../images/rootPaneBorder_selected.png");
+}
+
+.root-pane:maximized, .root-pane:fullscreen{
+    -fx-border-image-source: null;
+}
+
+.internal-frame > .root-pane:maximized{
+  -fx-border-image-source: url("../images/rootPaneBorder_selected.png");
+}
+
+.root-pane:undecorated{
+    -fx-background-radius:0;
+    -fx-border-radius:0;
+    -fx-border-width:0;
+    -fx-border-color:null;
+}
+
+.root-pane > .root-pane-content {
+    -fx-background-color: -my-background;
+    /*-fx-border-color: #F0F;*/
+    /*-fx-border-width: 1;*/
+}
+
+.root-pane .root-pane-title-pane{
+    -fx-background-color: #DDD;
+    -fx-padding: 1 4 4 4;
+    -fx-border-image-insets: 0 0 0 0;
+    -fx-border-image-slice: 0 0 0 0 fill;
+    -fx-border-image-width: 0 0 0 0;
+}
+
+.root-pane:focused .root-pane-title-pane, .root-pane:selected .root-pane-title-pane{
+    -fx-background-color: #EEE;
+}
+
+.root-pane-title-pane > .title-pane-menu-button, .root-pane-title-pane > .iconify-button, .root-pane-title-pane > .maximize-restore-button, .root-pane-title-pane > .close-button 
+{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-border-width: 0;
+    -fx-label-padding: 0;
+    -fx-padding: 0;
+}
+
+.root-pane-title-pane > .title-pane-menu-button{
+    -fx-label-padding: 0;
+    -fx-graphic:url("../images/icon.png");	
+}
+
+.dialog > .root-pane-content > .root-pane-title-pane > .title-pane-menu-button{
+    visibility: hidden;
+}
+
+.root-layer{
+	-fx-background-color: #00000017;	
+}
+
+.internal-dialog-layer{
+	-fx-background-color: #00000033;	
+}
+
+.root-pane-title-pane > .title-pane-menu-button > .label{
+    -fx-label-padding: 0;
+    -fx-padding: 0;
+}
+
+.root-pane-title-pane > .title-pane-menu-button > .arrow-button{
+	/* hide arrow gap */
+    -fx-padding: 0;
+}
+
+.root-pane-title-pane > .title-pane-menu-button > .arrow-button > .arrow{
+	/* hide arrow */
+   -fx-padding: 0;
+}
+
+.root-pane-title-pane > .title-label{
+    -fx-text-fill: #444;
+	-fx-font-weight: bold;
+}
+
+.root-pane-title-pane > .iconify-button{
+    -fx-border-image-source: null;
+    -fx-graphic:url("../images/iconifyIcon.png");
+}
+.root-pane-title-pane > .iconify-button:hover{
+    -fx-graphic:url("../images/iconifyIcon_hover.png");
+}
+.root-pane-title-pane > .iconify-button:pressed{
+    -fx-graphic:url("../images/iconifyIcon_pressed.png");
+}
+
+.root-pane:iconified .root-pane-title-pane > .iconify-button{
+    -fx-graphic:url("../images/minimizeIcon.png");
+}
+.root-pane:iconified .root-pane-title-pane > .iconify-button:hover{
+    -fx-graphic:url("../images/minimizeIcon_hover.png");
+}
+.root-pane:iconified .root-pane-title-pane > .iconify-button:pressed{
+    -fx-graphic:url("../images/minimizeIcon_pressed.png");
+}
+
+.root-pane-title-pane > .maximize-restore-button{
+    -fx-border-image-source: null;
+    -fx-graphic:url("../images/maximizeIcon.png");
+}
+.root-pane-title-pane > .maximize-restore-button:hover{
+    -fx-graphic:url("../images/maximizeIcon_hover.png");
+}
+.root-pane-title-pane > .maximize-restore-button:pressed{
+    -fx-graphic:url("../images/maximizeIcon_pressed.png");
+}
+.root-pane:maximized .root-pane-title-pane > .maximize-restore-button{
+    -fx-graphic:url("../images/minimizeIcon.png");
+}
+.root-pane:maximized .root-pane-title-pane > .maximize-restore-button:hover{
+    -fx-graphic:url("../images/minimizeIcon_hover.png");
+}
+.root-pane:maximized .root-pane-title-pane > .maximize-restore-button:pressed{
+    -fx-graphic:url("../images/minimizeIcon_pressed.png");
+}
+
+.root-pane-title-pane > .close-button{
+    -fx-border-image-source: null;
+    -fx-graphic:url("../images/closeIcon.png");
+}
+.root-pane-title-pane > .close-button:hover{
+	-fx-graphic:url("../images/closeIcon_hover.png");
+}
+.root-pane-title-pane > .close-button:pressed{
+	-fx-graphic:url("../images/closeIcon_pressed.png");
+}
+
+/******************************************************************************* 
+ *                                                                             *
+ * ComboBox                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+/* since Java 8_111 to avoid button background appears in focus color */
+.combo-box-base:editable:focused{
+    -fx-background-color: -fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color !important;
+    -fx-background-insets: -0.2, 1, 2, -1.4, 2.6 !important;
+    -fx-background-radius: 3, 2, 1, 4, 1;
+}
+
+/******************************************************************************* 
+ *                                                                             *
+ * DesktopPane                                                                 *
+ *                                                                             *
+ ******************************************************************************/
+.desktop-pane{
+    -fx-background-color: #C5C9CC;
+}
+
+/******************************************************************************* 
+ *                                                                             *
+ * Dialog                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+/*.dialog{
+	    -sfx-fxml-title-pane: null;	
+}*/
+
+.confirm-dialog{
+	-sfx-fxml-content: url("../fxml/confirmDialog.fxml");
+}
+
+.confirm-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-confirm.png");*/
+    -fx-image: url("../images/questionIcon.png");
+}
+
+.info-dialog{
+	-sfx-fxml-content: url("../fxml/messageDialog.fxml");
+}
+
+.info-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-information.png");*/
+    -fx-image: url("../images/infoIcon.png");
+}
+
+.warning-dialog{
+	-sfx-fxml-content: url("../fxml/messageDialog.fxml");
+}
+
+.warning-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-warning.png");*/
+    -fx-image: url("../images/warningIcon.png");
+}
+
+.error-dialog{
+	-sfx-fxml-content: url("../fxml/messageDialog.fxml");
+}
+
+.error-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-error.png");*/
+    -fx-image: url("../images/errorIcon.png");
+}
+
+.details-dialog{
+	-sfx-fxml-content: url("../fxml/detailsDialog.fxml");
+}
+
+.details-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-information.png");*/
+    -fx-image: url("../images/infoIcon.png");
+}
+
+.details-dialog .details-button{	
+    /*-fx-graphic: url("/com/sun/javafx/scene/control/skin/modena/dialog-more-details.png");*/
+    -fx-graphic: url("../images/detailsMore.png");
+    -fx-background-color: null;
+    -fx-padding: 3 5 3 2 ;
+}
+
+.details-dialog:expanded .details-button{	
+    /*-fx-graphic: url("/com/sun/javafx/scene/control/skin/modena/dialog-fewer-details.png");*/
+    -fx-graphic: url("../images/detailsLess.png");
+}
+
+.details-dialog .details-button:hover {
+    -fx-underline: true;
+}
+
+.input-dialog{
+	-sfx-fxml-content: url("../fxml/inputDialog.fxml");
+}
+
+.input-dialog .message-icon{
+    /*-fx-image: url("/com/sun/javafx/scene/control/skin/modena/dialog-confirm.png");*/
+    -fx-image: url("../images/questionIcon.png");    
+}
+
+.login-dialog{
+	-sfx-fxml-content: url("../fxml/loginDialog.fxml");
+}
+
+.login-dialog .message-icon{
+    -fx-image: url("../images/login.png");
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * TitledBorderPane                                                            *
+ *                                                                             *
+ ******************************************************************************/
+
+.titled-border-pane{
+  /*-sfx-title-position: CENTER_LEFT;*/
+  -fx-border-color: #0000002C;
+  -fx-border-width: 1;
+  -fx-padding: 0.666em 2 2 2;
+  -fx-border-insets: 0.5em 0 0 0;
+  -fx-border-radius: 4;
+}
+
+.titled-border-pane.top-border-only{
+  -fx-border-width: 1 0 0 0;
+  -fx-padding: 0.666em 0 0 0;
+  -fx-border-insets: 0.5em 0 0 0;
+  -fx-border-radius: 0;
+}
+
+.titled-border-pane:top{
+  -fx-padding: 2 2 2 2;	
+  -fx-border-insets: 1.25em 0 0 0;	
+}
+
+.titled-border-pane.top-border-only:top{
+  -fx-padding: 0 0 0 0;	
+  -fx-border-insets: 1.25em 0 0 0;	
+}
+
+.titled-border-pane:bottom{
+  -fx-padding: 1.5em 2 2 2;	
+  -fx-border-insets: 0 0 0 0;	
+}
+
+.titled-border-pane.top-border-only:bottom{
+  -fx-padding: 1.5em 0 0 0;	
+  -fx-border-insets: 0 0 0 0;	
+}
+
+.titled-border-pane:titleless 
+{
+  -fx-padding: 2 2 2 2;	
+  -fx-border-insets: 0 0 0 0;	
+}
+
+.titled-border-pane.top-border-only:titleless 
+{
+  -fx-padding: 0 0 0 0;	
+  -fx-border-insets: 0 0 0 0;	
+}
+
+.titled-border-pane > .border-title{
+  -fx-padding: 0 10;	
+  -fx-background-color: #EEE; /* #F4F4F4 */
+  -fx-background-insets: 0 5;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tooltip                                                                     *
+ *                                                                             *
+ ******************************************************************************/
+
+.tooltip {
+    -fx-text-fill: white;
+    -fx-background-color: #444E;
+    -fx-background-radius: 4px;
+    -fx-background-insets: 0;
+    -fx-padding: 0.667em 0.667em 0.667em 0.667em;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0.0, 0, 3);
+    -fx-font-size: 0.9em;
+}
+
+/******************************************************************************* 
+ *                                                                             *
+ * Validation                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+.label.validation-warning{
+    -fx-graphic: url("../images/validationWarning.png");
+    -fx-content-display: graphic-only;
+}
+
+.decorator-pane{
+    /*-sfx-decorator-position: baseline-right;
+    -sfx-decorator-xoffset: 10;
+    -sfx-decorator-yoffset: 0;*/
+}
+
+.text-area:invalid, .text-field:invalid, .spinner:invalid, .slider:invalid, .choice-box:invalid, .combo-box:invalid, .date-picker:invalid, .color-picker:invalid{
+  -fx-text-fill: #C00;
+  -fx-border-color: #F00E;
+  -fx-border-insets: -1;
+  -fx-border-radius: 2;
+}
+
+.check-box:invalid{
+  -fx-border-color: #F00E;
+  -fx-border-insets: -2;
+  -fx-padding: 0 0 0 0;
+  -fx-border-radius: 2;
+}
+
+/*.validation-warning-pane{
+  -fx-background-color: #F001;	
+}*/
+
+/*.validation-error{
+  -fx-text-fill: #C00 !important;
+}*/
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * XDatePicker                                                                 *
+ *                                                                             *
+ ******************************************************************************/
+.x-date-picker{
+    -fx-skin: "syntheticafx.base.skin.XDatePickerSkin";
+    -sfx-clearable: true;
+    /*-sfx-clear-button-position: LEFT;*/
+}
+
+.x-date-picker > .leading-container{
+    -fx-padding: 0 0 0 4;
+    -fx-spacing: 4;
+    /*-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 0 1 1, 1, 2;
+    -fx-background-radius: 3 0 0 3, 2 0 0 2, 1 0 0 1;*/
+}
+
+.x-date-picker > .trailing-container{
+    -fx-padding: 0 4 0 0;
+    -fx-spacing: 4;
+    /*-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 1 0, 1 1 1 0, 2 2 2 0;
+    -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 1 1 0;*/
+}
+
+.x-date-picker .clear-button{
+    -fx-font-size: 0.667em; /* snap to pixel */
+    -fx-background-color: #555;
+    -fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0 4; /* pref size size/2 */
+}
+
+ .x-date-picker .clear-button:hover {
+    -fx-background-color: #F00;    
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * OptionDatePicker                                                            *
+ *                                                                             *
+ ******************************************************************************/
+.option-date-picker{
+    -fx-skin: "syntheticafx.base.skin.OptionDatePickerSkin";
+    -sfx-clearable: false;
+    /* -sfx-option-button-position: RIGHT;*/
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * XComboBox                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+.x-combo-box{
+    -fx-skin: "syntheticafx.base.skin.XComboBoxListViewSkin";
+    -sfx-clearable: true;
+    /*-sfx-clear-button-position: LEFT;*/
+}
+
+.x-combo-box > .leading-container{
+    -fx-padding: 0 0 0 4;
+    -fx-spacing: 4;
+}
+
+.x-combo-box > .trailing-container{
+    -fx-padding: 0 4 0 0;
+    -fx-spacing: 4;
+}
+
+.x-combo-box .clear-button{
+    -fx-font-size: 0.667em; /* snap to pixel */
+    -fx-background-color: #555;
+    -fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0 4; /* pref size size/2 */
+}
+
+ .x-combo-box .clear-button:hover {
+    -fx-background-color: #F00;    
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * OptionComboBox                                                              *
+ *                                                                             *
+ ******************************************************************************/
+.option-combo-box{
+    -fx-skin: "syntheticafx.base.skin.OptionComboBoxListViewSkin";
+    -sfx-clearable: false;
+    /* -sfx-option-button-position: RIGHT;*/
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * XTextField                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+.x-text-field{
+    -fx-skin: "syntheticafx.base.skin.XTextFieldSkin";
+    -sfx-clearable: true; 
+    /*-sfx-clear-button-position: LEFT;*/
+}
+
+.x-text-field > .leading-container{
+    -fx-padding: 0 0 0 6;
+    -fx-spacing: 4;
+}
+
+.x-text-field > .trailing-container{
+    -fx-padding: 0 6 0 0;
+    -fx-spacing: 4;
+}
+
+.x-text-field .clear-button{	
+    -fx-font-size: 0.667em; /* snap to pixel */
+    -fx-background-color: #555;
+    -fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0 4; /* pref size size/2 */
+}
+
+ .x-text-field .clear-button:hover {
+    -fx-background-color: #F00;    
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * OptionControlBox                                                            *
+ *                                                                             *
+ ******************************************************************************/
+.option-control-box{
+    -fx-spacing: 5;
+    -sfx-clearable: true; 
+    /*-sfx-clear-button-position: LEFT;
+    -sfx-option-button-position: RIGHT;*/
+}
+
+.option-control-box .clear-button{
+    -fx-font-size: 0.667em; /* snap to pixel */
+    -fx-background-color: #555;
+    -fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0 4; /* pref size size/2 */
+}
+
+.option-control-box .clear-button:hover {
+    -fx-background-color: #F00;    
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * OptionMenuButton                                                            *
+ *                                                                             *
+ ******************************************************************************/
+.option-button{
+    -fx-graphic: url("../images/optionButton.png");	
+}
+
+.option-button:hover{
+    -fx-graphic: url("../images/optionButton_hover.png");	
+}
+
+.option-menu-button{
+    -fx-graphic: url("../images/optionMenuButton.png");	
+}
+
+.option-menu-button:hover{
+    -fx-graphic: url("../images/optionMenuButton_hover.png");	
+}
+
+.option-menu-button .arrow
+{
+    -fx-shape: null;
+    -fx-padding: 0;	
+}
+
+/******************************************************************************* 
+ *                                                                             *
+ * OptionTextField                                                             *
+ *                                                                             *
+ ******************************************************************************/
+.option-text-field{
+    -fx-skin: "syntheticafx.base.skin.OptionTextFieldSkin";
+    /* -sfx-option-button-position: RIGHT;*/
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * SearchField                                                                 *
+ *                                                                             *
+ ******************************************************************************/
+.search-field{
+    -fx-skin: "syntheticafx.base.skin.SearchFieldSkin";
+}
+
+.search-field .option-button{
+    -fx-graphic: url("../images/searchButton.png");	
+}
+
+.search-field .option-button:hover{
+    -fx-graphic: url("../images/searchButton_hover.png");	
+}
+
+.search-field .option-menu-button{
+    -fx-graphic: url("../images/searchMenuButton.png");	
+}
+
+.search-field .option-menu-button:hover{
+    -fx-graphic: url("../images/searchMenuButton_hover.png");	
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * XTableView                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+.x-table-view .filter-column-header{
+    -fx-font-weight: normal;
+}
+
+.x-table-view .filter-column-header > .label{
+    -fx-padding: 2 2 2 1;
+    -fx-content-display: graphic-only;    
+    /*-fx-background-color: red;*/
+}
+
+.x-table-view .filter-box{
+    /*-fx-padding: 0 4 0 4;*/
+    /*-fx-background-color: red;*/
+}
+
+/* reduce pref width in filter row */
+.x-table-view .filter-box .text-field, 
+.x-table-view .filter-control 
+{
+	-fx-pref-column-count: 8;
+}
+
+.x-table-view .filter-header-clear-button, 
+.x-table-view .filter-header-filler {
+    -fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
+    /*-fx-background-insets: 0, 0 1 1 0, 1 2 2 1;*/
+    -fx-background-insets: 0, 0 0 1 0, 1 1 2 1;
+}
+
+.x-table-view .filter-header-clear-button{
+    -fx-background-insets: 0, 0 0 1 1, 1 1 2 2;
+}
+
+.x-table-view .filter-header-clear-image{
+    -fx-background-color: #555;
+    /*-fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";*/
+    /*-fx-shape: "M 0,0 V2 H1 L 4,5 7,2 H8 V3 L 5,6 8,9 V10 H7 L 4,7 1,10 H0 V9 L 3,6 0,3 Z";*/    
+    -fx-shape: "M 0,0 V4 H1 L 4,7 7,4 H8 V5 L 5,8 8,11 V12 H7 L 4,9 1,12 H0 V11 L 3,8 0,5 Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0 4; /* pref size size/2 */
+}
+
+.x-table-view .filter-header-clear-button:hover .filter-header-clear-image{
+    -fx-background-color: #F00;    
+}
+
+.x-table-view .filter-header-clear-button:disabled .filter-header-clear-image{
+    -fx-background-color: #999;
+}
+
+.x-table-view .show-hide-columns-button:hover .show-hide-column-image{
+    -fx-background-color: #808080;    
+}
+
+
+/******************************************************************************* 
+ *                                                                             *
+ * Filter                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+
+.filter-box{
+    -fx-spacing: 5;
+}
+
+.filter-control .option-menu-button,
+.filter-box .option-menu-button{
+    -fx-graphic: url("../images/filterPopupIcon.png");	
+}
+
+.filter-control .option-menu-button:hover,
+.filter-box .option-menu-button:hover{
+    -fx-graphic: url("../images/filterPopupIcon_hover.png");	
+}
+
+.filter-control .option-button,
+.filter-box .option-button{
+    -fx-graphic: url("../images/filterIcon.png");	
+}
+
+.filter-control .option-button:hover,
+.x-table-view .filter-box .option-button:hover{
+    -fx-graphic: url("../images/filterIcon_hover.png");	
+}
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="tipConfig" fx:id="tipConfig" maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.cenpalab.siguapa.preferences.FX_ConfigController">
+	<center>
+		<TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="510.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+			<tabs>
+				<Tab fx:id="tabSystem" text="Sistema" />
+				<Tab fx:id="tabDB" text="Base de datos" />
+				<Tab fx:id="tabPrinters" text="Impresoras" />
+				<Tab fx:id="tabCostArea" text="Areas de costo" />
+				<Tab fx:id="tabCostCenter" text="Centros de costo" />
+				<Tab fx:id="tabMenuGroups" text="Grupos del menú" />
+				<Tab fx:id="tabCurrency" text="Monedas" />
+				<Tab fx:id="tabUnits" text="Medidas" />
+				<Tab fx:id="tabUsers" text="Usuarios" />
+			</tabs>
+		</TabPane>
+	</center>
+</BorderPane>

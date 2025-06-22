@@ -1,0 +1,17 @@
+/*
+ * My 'Dark' Stylesheet file.
+ */
+
+.root {
+	-fx-base: rgba(60, 63, 65, 255);
+}
+.button {
+	-fx-border-radius: 10 10 10 10;
+	-fx-background-radius: 10 10 10 10;
+}
+/*.tool-bar {
+	-fx-border-style: solid;
+	-fx-border-color: darkgrey, lightgray, darkgrey;
+	-fx-border-width: 2, 2, 2;
+	-fx-border-insets: 0, 2, 4;
+}*/

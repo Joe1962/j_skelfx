@@ -1,0 +1,6 @@
+siguapa TODO:
+
+TODO: get rid of FX_Logo.fxml, it's just an empty StackPane, do it programatically.
+TODO: on startup, check for DB config, if none, show DB config dialog.
+TODO: on startup, if DB connection fails, ask if configure DB or exit.
+
