@@ -27,12 +27,16 @@ import java.util.logging.Logger;
  */
 public class CLS_Preferences {
 	private static SettingsHandlerJSON MyConfig = new SUB_SettingsHandlerJSON();
-	private static Path MyConfigPath = MyConfig.getDefaultConfigPathJSON(AppInfo.getTITLE());
+	//private static Path MyConfigPath = MyConfig.getDefaultConfigPathJSON(AppInfo.getTITLE());
 
 
+
+	private static Path getConfigPath() {
+		return MyConfig.getDefaultConfigPathJSON(AppInfo.getPREFNODE());
+	}
 
 	private static boolean checkForConfigJSON() throws IOException {
-		if (!MyConfigPath.toFile().canWrite()) {
+		if (!getConfigPath().toFile().canWrite()) {
 			if (!createDefaultConfigJSON()) {
 				// TODO: popup some error and exit...
 				System.exit(12);
@@ -49,13 +53,13 @@ public class CLS_Preferences {
 		MyConfig.setValue("WINDOW","Style", GLOBAL.defaultStyle);
 		MyConfig.setValue("APP", "Reg", "");
 
-		MyConfig.save(MyConfigPath);
+		MyConfig.save(getConfigPath());
 		return true;
 	}
 
 	public static void loadConfigJSON() throws IOException {
 		checkForConfigJSON();
-		MyConfig.load(MyConfigPath);
+		MyConfig.load(getConfigPath());
 
 		GLOBAL.DBDefaultDB = MyConfig.getValue("GENERAL","DefaultDB", Integer.class, 0);
 		FLAGS.setBEEP(MyConfig.getValue("GENERAL","Beep", Boolean.class, false));
@@ -122,7 +126,7 @@ public class CLS_Preferences {
 		saveConfigDBsJSON();
 
 		try {
-			MyConfig.save(MyConfigPath);
+			MyConfig.save(getConfigPath());
 		} catch (IOException ex) {
 			Logger.getLogger(CLS_Preferences.class.getName()).log(Level.SEVERE, null, ex);
 		}
