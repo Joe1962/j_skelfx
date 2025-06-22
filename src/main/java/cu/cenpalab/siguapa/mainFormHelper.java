@@ -41,12 +41,47 @@ import javafx.scene.layout.VBox;
  *
  * @author joe1962
  */
-public class mainGUIHelper {
-	//private StackPane MyCenterPane;
-	//private VBox butToolbarLeft;
-	//private VBox butToolbarRight;
-	//private Button butHome, butConfig, butDB, butECR, butIngredients, butMenu, butHostal;
-	//private Button butInventory, butSales, butBuys, butFinance, butReports, butSecurity, butExit;
+public class mainFormHelper {
+
+	public void setupToolBars(BorderPane MainPane, VBox tlbLeft, VBox tlbRight) {
+		tlbLeft.setStyle(CONSTS.cssEtchedBorder);
+		MainPane.setLeft(tlbLeft);
+		BorderPane.setMargin(tlbLeft, new Insets(1, 0, 0, 1));
+		tlbRight.setStyle(CONSTS.cssEtchedBorder);
+		MainPane.setRight(tlbRight);
+		BorderPane.setMargin(tlbRight, new Insets(1, 1, 0, 0));
+	}
+
+	public void setupStatusbar(BorderPane MainPane, StackPane StatusPane) {
+		GLOBAL.StatusBar = StatusPane;
+		URL location = GLOBAL.MainClass.getResource("/fxml/statusbar/FX_StatusBar.fxml");
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(location);
+		try {
+			GLOBAL.StatusBar = loader.load();
+		} catch (IOException ex) {
+			Logger.getLogger(GLOBAL.MainClass.getName()).log(Level.SEVERE, null, ex);
+		}
+		GLOBAL.StatusBar.setStyle(CONSTS.cssEtchedBorder);
+		MainPane.setBottom(GLOBAL.StatusBar);
+		GLOBAL.FXStatusBarController = loader.getController();
+		BorderPane.setMargin(GLOBAL.StatusBar, new Insets(0, 1, 0, 1));
+	}
+
+	public void setInitialStatusBarState() {
+//		if (FLAGS.isDBCONNECTED()) {
+//			if (FLAGS.isDBGLOADED()) {
+//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.GREEN);
+//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, false);
+//			} else {
+//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.YELLOW);
+//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME() + " pero error cargando...", 10, false);
+//			}
+//		} else {
+			GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.RED);
+//			GLOBAL.FXStatusBarController.setStatusText("ERROR conectando a Base de Datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, true);
+//		}
+	}
 
 	public void prepHomeButtons(MainFormController theMainFormController, VBox tlbLeft, VBox tlbRight) {
 		//this.butToolbarLeft = tlbLeft;
@@ -148,46 +183,6 @@ public class mainGUIHelper {
 //		butReports.setDisable(theState);
 //		butSecurity.setDisable(theState);
 		//butExit
-	}
-
-	public void setupToolBars(BorderPane MainPane, VBox tlbLeft, VBox tlbRight) {
-		tlbLeft.setStyle(CONSTS.cssEtchedBorder);
-		MainPane.setLeft(tlbLeft);
-		BorderPane.setMargin(tlbLeft, new Insets(1, 0, 0, 1));
-		tlbRight.setStyle(CONSTS.cssEtchedBorder);
-		MainPane.setRight(tlbRight);
-		BorderPane.setMargin(tlbRight, new Insets(1, 1, 0, 0));
-	}
-
-	public void setupStatusbar(BorderPane MainPane, StackPane StatusPane) {
-		GLOBAL.StatusBar = StatusPane;
-		URL location = GLOBAL.MainClass.getResource("/fxml/statusbar/FX_StatusBar.fxml");
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(location);
-		try {
-			GLOBAL.StatusBar = loader.load();
-		} catch (IOException ex) {
-			Logger.getLogger(GLOBAL.MainClass.getName()).log(Level.SEVERE, null, ex);
-		}
-		GLOBAL.StatusBar.setStyle(CONSTS.cssEtchedBorder);
-		MainPane.setBottom(GLOBAL.StatusBar);
-		GLOBAL.FXStatusBarController = loader.getController();
-		BorderPane.setMargin(GLOBAL.StatusBar, new Insets(0, 1, 0, 1));
-	}
-
-	public void setInitialStatusBarState() {
-//		if (FLAGS.isDBCONNECTED()) {
-//			if (FLAGS.isDBGLOADED()) {
-//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.GREEN);
-//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, false);
-//			} else {
-//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.YELLOW);
-//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME() + " pero error cargando...", 10, false);
-//			}
-//		} else {
-			GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.RED);
-//			GLOBAL.FXStatusBarController.setStatusText("ERROR conectando a Base de Datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, true);
-//		}
 	}
 
 	public void loadCenterContentsAll(StackPane CenterPane) {

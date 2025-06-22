@@ -158,7 +158,7 @@ public class MainForm extends Application {
 		primaryStage.setMaximized(WINDOWGEOM.isWindowMaximized());
 
 		// Set up main toolbars, module buttons, center panel contents (module panels):
-		mainGUIHelper GUIHelper = new mainGUIHelper();
+		mainFormHelper GUIHelper = new mainFormHelper();
 		GLOBAL.tlbLeft = new VBox();
 		GLOBAL.tlbRight = new VBox();
 		GUIHelper.prepHomeButtons(GLOBAL.MainController, GLOBAL.tlbLeft, GLOBAL.tlbRight);
@@ -440,36 +440,36 @@ public class MainForm extends Application {
 		}
 	}
 
-	public void setupMainButtons(boolean DBConnected) {
-		butHome.setDisable(false);
-		butExit.setDisable(false);
-
-		if (DBConnected) {
-			// Set up buttons for DBConnected connect SUCCESS:
-			butConfig.setDisable(!RunTime.AllowConfig);
-			butDB.setDisable(!RunTime.AllowDB);
-			butAnimals.setDisable(!RunTime.AllowAnimals);
-			butFeeds.setDisable(!RunTime.AllowFeeds);
-			butNorms.setDisable(!RunTime.AllowNorms);
-			butOrders.setDisable(!RunTime.AllowOrders);
-			butStock.setDisable(!RunTime.AllowStock);
-			butDeliveries.setDisable(!RunTime.AllowDeliveries);
-			butReports .setDisable(!RunTime.Allowreports);
-			butDataMining.setDisable(!RunTime.AllowDataMining);
-		} else {
-			// Set up buttons for DBConnected connect FAILED:
-			butDB.setDisable(true);
-			butConfig.setDisable(false);
-			butAnimals.setDisable(true);
-			butFeeds.setDisable(true);
-			butNorms.setDisable(true);
-			butOrders.setDisable(true);
-			butStock.setDisable(true);
-			butDeliveries.setDisable(true);
-			butReports .setDisable(true);
-			butDataMining.setDisable(true);
-		}
-	}
+//	public void setupMainButtons(boolean DBConnected) {
+//		butHome.setDisable(false);
+//		butExit.setDisable(false);
+//
+//		if (DBConnected) {
+//			// Set up buttons for DBConnected connect SUCCESS:
+//			butConfig.setDisable(!RunTime.AllowConfig);
+//			butDB.setDisable(!RunTime.AllowDB);
+//			butAnimals.setDisable(!RunTime.AllowAnimals);
+//			butFeeds.setDisable(!RunTime.AllowFeeds);
+//			butNorms.setDisable(!RunTime.AllowNorms);
+//			butOrders.setDisable(!RunTime.AllowOrders);
+//			butStock.setDisable(!RunTime.AllowStock);
+//			butDeliveries.setDisable(!RunTime.AllowDeliveries);
+//			butReports .setDisable(!RunTime.Allowreports);
+//			butDataMining.setDisable(!RunTime.AllowDataMining);
+//		} else {
+//			// Set up buttons for DBConnected connect FAILED:
+//			butDB.setDisable(true);
+//			butConfig.setDisable(false);
+//			butAnimals.setDisable(true);
+//			butFeeds.setDisable(true);
+//			butNorms.setDisable(true);
+//			butOrders.setDisable(true);
+//			butStock.setDisable(true);
+//			butDeliveries.setDisable(true);
+//			butReports .setDisable(true);
+//			butDataMining.setDisable(true);
+//		}
+//	}
 
 	public void setWindowTitle(String MyTitle) {
 		GLOBAL.MainStage.setTitle(MyTitle);
