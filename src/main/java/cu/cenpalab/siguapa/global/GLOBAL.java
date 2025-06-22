@@ -91,6 +91,8 @@ public class GLOBAL {
 	// DB vars:
 //	public static DBConnectionHandler MyStaticDBConnHandler = new DBConnectionHandler();										// TODO: to remove...
 	public static int DBErrorState = 0;				// 0: no error, 1: no DB configured, 2: exception connecting.
+	public static String DBErrorDesc;
+	public static SQLException DBException;
 	public static boolean NoDB = false;
 	public static int DBDefaultDB = 0;
 //	public static String DBDriverType = "jdbc";

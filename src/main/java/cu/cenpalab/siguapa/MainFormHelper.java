@@ -18,7 +18,6 @@ import static cu.cenpalab.siguapa.MainForm.butStock;
 import cu.cenpalab.siguapa.global.CONSTS;
 import cu.cenpalab.siguapa.global.GLOBAL;
 import cu.cenpalab.siguapa.global.TYP_GlobalFXRef;
-import cu.cenpalab.siguapa.logo.FX_LogoController;
 import cu.cenpalab.siguapa.preferences.FX_ConfigController;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.toFrontHelper;
 import java.io.IOException;
@@ -229,11 +228,23 @@ public class MainFormHelper {
 	}
 
 	private void loadCenterContentsLogo() {
-		GLOBAL.ccLogo = GLOBAL.CenterPane;
-		GLOBAL.FXLogoController = new FX_LogoController();
-		TYP_GlobalFXRef FXNode_Controller = loadCenterContentsHelper(GLOBAL.CenterPane, "/fxml/logo/FX_Logo.fxml", GLOBAL.ccLogo, GLOBAL.FXLogoController);
-		GLOBAL.ccLogo = FXNode_Controller.MyParent;
-		GLOBAL.FXLogoController = (FX_LogoController) FXNode_Controller.MyController;
+		StackPane ccLogo = new StackPane();
+		StringBuilder myStyle = new StringBuilder();
+
+		myStyle.append("-fx-background-repeat: no-repeat; ");
+		myStyle.append("-fx-background-position-x: center; ");
+		myStyle.append("-fx-background-position-x: center; ");
+		myStyle.append("-fx-background-size: stretch;");
+		//myStyle.append("-fx-background-color: lightgrey; ");
+		myStyle.append("-fx-background-image: url('/images/Atomic_Monster.png'); ");
+
+		ccLogo.setStyle(myStyle.toString());
+
+		ccLogo.setId("tipLogo");
+
+		GLOBAL.CenterPane.getChildren().add(ccLogo);
+		GLOBAL.CenterPane.setOpacity(0);
+		GLOBAL.ccLogo = ccLogo.getParent();
 	}
 
 	private void loadCenterContentsConfig() {

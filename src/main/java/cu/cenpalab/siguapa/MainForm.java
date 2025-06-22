@@ -194,10 +194,8 @@ public class MainForm extends Application {
 			doDBConfig();
 		}
 		if (FLAGS.isERR_DB_CONN()) {
-			String title = "AVISO";
-			String header = "Revise la configuración del " + AppInfo.getTITLE() + ":";
-			String content = "Ocurrió una excepción al tratar de conectar a la base de datos...";
-			MsgWarningOKFX(GLOBAL.MainStage, title, header, content);
+			boolean retBool = MySQLxHandler.handleExceptionPG(GLOBAL.DBException);
+
 			// Go to DB config...
 			doDBConfig();
 		}
@@ -422,7 +420,8 @@ public class MainForm extends Application {
 		} catch (SQLException ex) {
 			FLAGS.setDBCONNECTED(false);
 			Logger.getLogger(GLOBAL.MainClass.getName()).log(Level.SEVERE, null, ex);
-			boolean retBool = MySQLxHandler.handleExceptionPG(ex);
+			GLOBAL.DBErrorDesc = ex.getLocalizedMessage();
+			GLOBAL.DBException = ex;
 			return 2;
 		}
 		return 0;
