@@ -27,7 +27,6 @@ import java.util.logging.Logger;
  */
 public class CLS_Preferences {
 	private static SettingsHandlerJSON MyConfig = new SUB_SettingsHandlerJSON();
-	//private static Path MyConfigPath = MyConfig.getDefaultConfigPathJSON(AppInfo.getTITLE());
 
 
 
