@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<GridPane gridLinesVisible="true" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.cenpalab.siguapa.statusbar.FX_StatusBarController">
+<GridPane gridLinesVisible="true" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.jsoft.j_skelfx.statusbar.FX_StatusBarController">
 	<columnConstraints>
 		<ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" prefWidth="300.0" />
 		<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
