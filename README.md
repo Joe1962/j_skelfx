@@ -1,7 +1,6 @@
-siguapa
+j_skelfx
 
-Sistema de Gestión Unificado de Alimento Para Animales.  
-(Unified Management System for Animal Feed).
+JavaFX application skeleton.  
 
 Copyright 2025, CENPALAB.
 Authors: Joe1962, PowerSlave.
