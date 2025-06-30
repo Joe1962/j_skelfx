@@ -5,6 +5,8 @@ TODO: change SQL exception dialogs to SimpleDialog with collapsed content area (
 
 ********************************************************************************
 
+- 250629:
+DONE: replace '$OWNER' substrings with 'skelfx' before showing tbl_sys_users.sql in error dialog.
 - 250627:
 DONE: MainForm.Login: handle IOException.
 DONE: check for sys_users table in DB, validate fields. On fail, tell user to create table (show SQL)...???

@@ -35,6 +35,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -491,17 +493,23 @@ public class MainForm extends Application {
 			HBox.setMargin(IconError, new Insets(25, 25, 25, 25));
 
 			// Get sql code in String:
-			StringBuilder MyContentString = new StringBuilder();
+			StringBuilder contentSB = new StringBuilder();
+			var tempSB = new StringBuilder();
 			try {
-				MyContentString.append(Loginhandler.getSQLText());
+				tempSB.append(Loginhandler.getSQLText());
 			} catch (IOException ex) {
 				System.getLogger(MainForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
 			}
+			// Replace '$OWNER' substrings with 'skelfx'
+			Pattern p = Pattern.compile("\\$OWNER");
+			Matcher m = p.matcher(tempSB);
+			contentSB.append(m.replaceAll("skelfx"));
+
 			// Set up sql code in TextArea:
 			TextArea TextAreaContent = new TextArea();
 			TextAreaContent.setEditable(false);
 			TextAreaContent.setFont(GLOBAL.MyDefaultFont);
-			TextAreaContent.setText(MyContentString.toString());
+			TextAreaContent.setText(contentSB.toString());
 
 			// Encapsulate TextArea in TitledPane:
 			TitledPane MyTitledPane = new TitledPane();
