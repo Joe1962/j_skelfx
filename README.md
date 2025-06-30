@@ -2,7 +2,7 @@ j_skelfx
 
 JavaFX application skeleton.  
 
-Copyright 2025, Joe1962.
+Copyright 2025, Joe1962.  
 Authors: Joe1962.
 
 Dependencies:  
