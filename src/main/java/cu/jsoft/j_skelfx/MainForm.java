@@ -1,5 +1,6 @@
 /*
  * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx;
 
@@ -20,37 +21,24 @@ import static cu.jsoft.j_utilsfxlite.global.CONSTS.NEW_LINE;
 import static cu.jsoft.j_utilsfxlite.global.FLAGS.isDEBUG;
 import static cu.jsoft.j_utilsfxlite.global.FLAGS.setBEEPAVAILABLE;
 import cu.jsoft.j_utilsfxlite.networking.SingleInstance;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorOKFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorYesNoFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningOKFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningYesNoFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.SimpleDialog;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFXResources.getResourceImage;
-import cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.echoln;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.setupBeep;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TitledPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -243,13 +231,16 @@ public class MainForm extends Application {
 
 	}
 
+	/**
+	 * Do all non-GUI application startup tasks here...
+	 */
 	private void doLoadingTasks() {
 		// DEBUG:
-		SUB_UtilsNotifications.echoln("javafx.runtime.version: " + System.getProperty("javafx.runtime.version"), isDEBUG(), true);
-		SUB_UtilsNotifications.echoln("Java version: " + System.getProperty("java.version"), isDEBUG(), true);
-		SUB_UtilsNotifications.echoln("JAVA_HOME: " + System.getenv("JAVA_HOME"), isDEBUG(), true);
-		SUB_UtilsNotifications.echoln("JRE_HOME: " + System.getenv("JRE_HOME"), isDEBUG(), true);
-		SUB_UtilsNotifications.echoln("JDK_HOME: " + System.getenv("JDK_HOME"), isDEBUG(), true);
+		echoln("javafx.runtime.version: " + System.getProperty("javafx.runtime.version"), isDEBUG(), true);
+		echoln("Java version: " + System.getProperty("java.version"), isDEBUG(), true);
+		echoln("JAVA_HOME: " + System.getenv("JAVA_HOME"), isDEBUG(), true);
+		echoln("JRE_HOME: " + System.getenv("JRE_HOME"), isDEBUG(), true);
+		echoln("JDK_HOME: " + System.getenv("JDK_HOME"), isDEBUG(), true);
 
 		// Check for multiple instances:
 		if (!checkSingleInstanceFX()) {
@@ -454,103 +445,19 @@ public class MainForm extends Application {
 		System.exit(0);
 	}
 
-	private void Login() throws IOException {
-		LoginMain Loginhandler = new LoginMain();
+	private void Login() throws IOException, SQLException {
+		LoginMain Loginhandler = new LoginMain(GLOBAL.MainClass, GLOBAL.DBConnHandler, GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBUSER(), GLOBAL.MyLargeFontBold, GLOBAL.MyDefaultFont);
 
-		ArrayList<String> UserTableErrorsCheck = new ArrayList();
-		try {
-			UserTableErrorsCheck = Loginhandler.checkUsersTable(GLOBAL.DBConnHandler, GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME());
-		} catch (SQLException ex) {
-			System.getLogger(MainForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-		}
-		if (!UserTableErrorsCheck.isEmpty()) {
-			StringBuilder ErrorLines = new StringBuilder();
+		GLOBAL.CurrUser = Loginhandler.doLogin(null, "Login: " + AppInfo.getTitleString(), new StringBuffer(CONSTS.AESSalt).reverse().toString(), new StringBuffer(CONSTS.SecKeyStr).reverse().toString(), CONSTS.iv);
 
-			for (String string : UserTableErrorsCheck) {
-				ErrorLines.append(string);
-				ErrorLines.append(NEW_LINE);
-			}
-
-			// Show simple window with tbl_sys_users.sql:
-			// Prep header String:
-			String MyHeader = "Se encontraron los siguientes errores en la tabla de usuarios:"
-				+ NEW_LINE
-				+ NEW_LINE
-				+ ErrorLines;
-			Label LabelHeader = new Label();
-			LabelHeader.setFont(GLOBAL.MyLargeFontBold);
-			LabelHeader.setText(MyHeader);
-			LabelHeader.setPadding(new Insets(10, 15, 15, 15));
-
-			// Prep ERROR icon:
-			ImageView IconError = getResourceImage("icons/64/dialog-error.png");
-
-			// Set up HBOX with Labelheader and IconError:
-			HBox theHeader = new HBox();
-			theHeader.setAlignment(Pos.CENTER);
-			theHeader.getChildren().add(LabelHeader);
-			theHeader.getChildren().add(IconError);
-			HBox.setMargin(IconError, new Insets(25, 25, 25, 25));
-
-			// Get sql code in String:
-			StringBuilder contentSB = new StringBuilder();
-			var tempSB = new StringBuilder();
-			try {
-				tempSB.append(Loginhandler.getSQLText());
-			} catch (IOException ex) {
-				System.getLogger(MainForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-			}
-			// Replace '$OWNER' substrings with 'skelfx'
-			Pattern p = Pattern.compile("\\$OWNER");
-			Matcher m = p.matcher(tempSB);
-			contentSB.append(m.replaceAll("skelfx"));
-
-			// Set up sql code in TextArea:
-			TextArea TextAreaContent = new TextArea();
-			TextAreaContent.setEditable(false);
-			TextAreaContent.setFont(GLOBAL.MyDefaultFont);
-			TextAreaContent.setText(contentSB.toString());
-
-			// Encapsulate TextArea in TitledPane:
-			TitledPane MyTitledPane = new TitledPane();
-			MyTitledPane.setContent(TextAreaContent);
-			MyTitledPane.setMaxHeight(1.7976931348623157E308);
-			MyTitledPane.setText("SQL code...");
-			MyTitledPane.setExpanded(false);
-			MyTitledPane.setAnimated(false);
-			MyTitledPane.expandedProperty().addListener((obs, oldValue, newValue) -> {
-				Platform.runLater(() -> {
-					MyTitledPane.requestLayout();
-					MyTitledPane.getScene().getWindow().sizeToScene();
-				});
-			});
-
-			// Encapsulate header and content in a BorderPane to handle resizing:
-			BorderPane MyBorderPane = new BorderPane();
-//			MyBorderPane.setTop(LabelHeader);
-			MyBorderPane.setTop(theHeader);
-			MyBorderPane.setCenter(MyTitledPane);
-
-			// Make TitledPane the SimpleDialog content:
-			Node MyContent = MyBorderPane;
-//				Node MyContent = LabelHeader;
-			// Show SimpleDialog:
-			SimpleDialog("ERROR...!!!", MyContent, "TERMINAR", 0, 0);
-
+		if (GLOBAL.CurrUser.isEmpty()) {
+			FLAGS.setLOGGEDIN(false);
+			// TODO: BE CAREFUL TO IMPLEMENT GUEST USE SAFELY...!!!
+			// Comment or remove next 2 lines to allow guest use:
 			Platform.exit();
-			System.exit(3);			// Change to the correct exit status code...
-		}
-
-		boolean retBool = Loginhandler.checkUsers(GLOBAL.MainClass, null, AppInfo.getTitleString(), "Crear primer usuario (superadmin)...", true, new StringBuffer(CONSTS.AESSalt).reverse().toString(), new StringBuffer(CONSTS.SecKeyStr).reverse().toString(), CONSTS.iv, GLOBAL.DBConnHandler);
-		if(!retBool) {
-			// TODO: ERROR message and exit with error status code...
-			MsgErrorOKFX(null, "AVISO", null, "No se creó el primer usuario," + NEW_LINE + "El sistema terminará.");
-			Platform.exit();
-			System.exit(2);			// Change to the correct exit status code...
-	}
-
-		GLOBAL.CurrUser = Loginhandler.doLogin(null, "Login: " + AppInfo.getTitleString(), new StringBuffer(CONSTS.AESSalt).reverse().toString(), new StringBuffer(CONSTS.SecKeyStr).reverse().toString(), CONSTS.iv, GLOBAL.DBConnHandler);
-		if (FLAGS.isLOGGEDIN()) {
+			System.exit(11);			// TODO: change to proper number
+		} else {
+			FLAGS.setLOGGEDIN(true);
 			GLOBAL.LastUser = GLOBAL.CurrUser;
 			// TODO: Save LastUser to preferences...
 			saveConfigJSON();
