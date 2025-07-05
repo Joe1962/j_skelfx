@@ -1,10 +1,11 @@
 skelfx TODO:
 
 TODO: Show sys_users GUI in preferences.
-TODO: change SQL exception dialogs to SimpleDialog with collapsed content area (change required in j_dbfx-lite).
 
 ********************************************************************************
 
+- 250705:
+TODO: change SQL exception dialogs to SimpleDialog with collapsed content area (change required in j_dbfx-lite).
 - 250629:
 DONE: replace '$OWNER' substrings with 'skelfx' before showing tbl_sys_users.sql in error dialog.
 - 250627:

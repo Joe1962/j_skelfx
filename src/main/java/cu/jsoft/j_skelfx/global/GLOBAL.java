@@ -12,13 +12,13 @@ import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import static cu.jsoft.j_dbfxlite.DBActions.getMyConn;
 import cu.jsoft.j_dbfxlite.DBConnectionHandler;
+import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_loginfx.users.TYP_user;
 import cu.jsoft.j_skelfx.AppInfo;
 import cu.jsoft.j_skelfx.MainFormController;
 import cu.jsoft.j_skelfx.logo.FX_LogoController;
 import static cu.jsoft.j_skelfx.preferences.CLS_Preferences.saveConfigJSON;
 import cu.jsoft.j_skelfx.preferences.FX_ConfigController;
-import cu.jsoft.j_skelfx.preferences.db.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.statusbar.FX_StatusBarController;
 import static cu.jsoft.j_utilsfxlite.global.FLAGS.isDEBUG;
 import cu.jsoft.j_utilsfxlite.preferences.TYP_WindowGeometry;
@@ -101,7 +101,6 @@ public class GLOBAL {
 	public static Node currNode;
 	public static Node ccLogo;
 	public static FX_LogoController FXLogoController;
-//	public static Parent ccConfig;
 	public static Node ccConfig;
 	public static FX_ConfigController FXConfigController;
 

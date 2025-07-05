@@ -4,8 +4,8 @@
  */
 package cu.jsoft.j_skelfx;
 
+import cu.jsoft.j_dbfxlite.exception.SQLx;
 import cu.jsoft.j_loginfx.LoginMain;
-import cu.jsoft.j_skelfx.exceptionhandlers.SQLx;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
@@ -53,7 +53,7 @@ public class MainForm extends Application {
 	private static final SingleInstance MySingleInstanceHandler = new SingleInstance();
 	public static Button butHome, butConfig, butDB, butAnimals, butFeeds, butNorms;
 	public static Button butOrders, butStock, butDeliveries, butReports, butDataMining, butExit;
-	private static SQLx MySQLxHandler = new SQLx();
+	//private SQLx MySQLxHandler = new SQLx(GLOBAL.MyLargeFontBold, GLOBAL.MyDefaultFont);
 	MainFormHelper GUIHelper = new MainFormHelper();
 
 
@@ -194,7 +194,8 @@ public class MainForm extends Application {
 			doDBConfig();
 		}
 		if (FLAGS.isERR_DB_CONN()) {
-			boolean retBool = MySQLxHandler.handleExceptionPG(GLOBAL.DBException);
+			SQLx MySQLxHandler = new SQLx(GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB), GLOBAL.MyLargeFontBold, GLOBAL.MyDefaultFont);
+			boolean retBool = MySQLxHandler.handleExceptionPG(GLOBAL.DBException, FLAGS.isDEBUG());
 
 			// Go to DB config...
 			doDBConfig();

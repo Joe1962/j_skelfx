@@ -1,8 +1,10 @@
 /*
  * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx.preferences.db;
 
+import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import cu.jsoft.j_skelfx.global.interfaces.CallbackForTabs;
@@ -127,9 +129,9 @@ public class FX_SysDBsController implements Initializable, CallbackForTabs {
 		// Add tab to container:
 		tabConfigDBs.getTabs().add(tabConfigDB);
 
-//		// Set this as callback for tabs stuff:
+		// Set this as callback for tabs stuff:
 		nestedController.setCallbackForTabs(this);
-//
+
 		// Load the data for this DB:
 		nestedController.loadData(aDB);
 	}

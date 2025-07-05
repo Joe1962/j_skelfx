@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx.preferences;
 
+import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.AppInfo;
 import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import static cu.jsoft.j_skelfx.global.GLOBAL.WINDOWGEOM;
-import cu.jsoft.j_skelfx.preferences.db.TYP_ConfigDBJSON;
 import cu.jsoft.j_utilsfxlite.interfaces.SettingsHandlerJSON;
 import cu.jsoft.j_utilsfxlite.preferences.SUB_SettingsHandlerJSON;
 import java.io.IOException;

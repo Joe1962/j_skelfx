@@ -1,8 +1,10 @@
 /*
  * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx.preferences.db;
 
+import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import static cu.jsoft.j_skelfx.global.GLOBAL.DBCONFIG;
 import cu.jsoft.j_skelfx.global.interfaces.CallbackForTabs;
