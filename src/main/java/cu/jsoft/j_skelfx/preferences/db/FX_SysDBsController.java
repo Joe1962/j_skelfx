@@ -71,6 +71,9 @@ public class FX_SysDBsController implements Initializable, CallbackForTabs {
 		}
 	}
 
+	public void updateData() {
+	}
+
 	public void setupTabConfigDBs() throws IOException {
 		// TODO: Load DB configs...
 		if (!GLOBAL.DBCONFIG.isEmpty()) {

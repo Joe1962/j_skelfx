@@ -5,6 +5,9 @@
  */
 package cu.jsoft.j_skelfx.preferences;
 
+import cu.jsoft.j_skelfx.preferences.db.FX_SysDBsController;
+import cu.jsoft.j_skelfx.preferences.system.FX_SysSystemController;
+import cu.jsoft.j_skelfx.preferences.users.FX_SysUsersController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,8 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import cu.jsoft.j_skelfx.preferences.db.FX_SysDBsController;
-import cu.jsoft.j_skelfx.preferences.system.FX_SysSystemController;
 
 /**
  * FXML Controller class
@@ -35,6 +36,20 @@ public class FX_ConfigController implements Initializable {
 	private Tab tabSystem;
 	@FXML
 	private Tab tabDB;
+	@FXML
+	private Tab tabUsers;
+	@FXML
+	private Tab tabPrinters;
+	@FXML
+	private Tab tabCostArea;
+	@FXML
+	private Tab tabCostCenter;
+	@FXML
+	private Tab tabMenuGroups;
+	@FXML
+	private Tab tabCurrency;
+	@FXML
+	private Tab tabUnits;
 
 	// Declare other tabs here...!!!
 
@@ -64,6 +79,7 @@ public class FX_ConfigController implements Initializable {
 
 		tabSystem.setContent(getSystemNode());
 		tabDB.setContent(getDBNode());
+		tabUsers.setContent(getUsersNode());
 
 		// Se up other tabs here...!!!
 
@@ -86,6 +102,13 @@ public class FX_ConfigController implements Initializable {
 	}
 
 	// Handle other nodes here...!!!
+	public Node getUsersNode() throws IOException {
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/users/FX_SysUsers.fxml"));
+		Node MyNode = loader.load();
+		FX_SysUsersController c = loader.getController();
+		return MyNode;
+	}
+
 
 	private void setFirstConfigPanel() {
 

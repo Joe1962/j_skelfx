@@ -1,5 +1,6 @@
 /*
  * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx;
 
@@ -85,9 +86,6 @@ public class MainFormHelper {
 	}
 
 	public void prepHomeButtons(MainFormController theMainFormController, VBox tlbLeft, VBox tlbRight) {
-		//this.butToolbarLeft = tlbLeft;
-		//this.butToolbarRight = tlbRight;
-
 		// Left buttons:
 		butHome = new Button();
 		butHome.setOnAction(theMainFormController::butHomeOnActionHandler);
@@ -208,7 +206,6 @@ public class MainFormHelper {
 	}
 
 	private TYP_GlobalFXRef loadCenterContentsHelper(StackPane destPane, String FXResource, Parent FXNode, Initializable Controller) {
-	//public static void loadCenterContentsHelper(String FXResource, StackPane destPane, TYP_GlobalFXRef FXNode_Controller) {
 		URL location = GLOBAL.MainClass.getResource(FXResource);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(location);
@@ -249,18 +246,7 @@ public class MainFormHelper {
 		GLOBAL.ccLogo.setOpacity(0);
 
 		GLOBAL.CenterPane.getChildren().add(GLOBAL.ccLogo);
-
-		//GLOBAL.CenterPane.setOpacity(0);
-		//GLOBAL.ccLogo = GLOBAL.ccLogo.getParent();
 	}
-
-//	private void loadCenterContentsConfig() throws IOException {
-//		GLOBAL.ccConfig = MyCenterPane;
-//		GLOBAL.FXConfigController = new FX_ConfigController();
-//		TYP_GlobalFXRef FXNode_Controller = loadCenterContentsHelper(MyCenterPane, "/fxml/preferences/FX_Config.fxml", GLOBAL.ccConfig, GLOBAL.FXConfigController);
-//		GLOBAL.ccConfig = FXNode_Controller.MyParent;
-//		GLOBAL.FXConfigController = (FX_ConfigController) FXNode_Controller.MyController;
-//	}
 
 	private void loadCenterContentsConfig() throws IOException {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/FX_Config.fxml"));
@@ -269,12 +255,6 @@ public class MainFormHelper {
 		GLOBAL.ccConfig.setOpacity(0);
 		GLOBAL.ccConfig.setId("tipConfig");
 		GLOBAL.CenterPane.getChildren().add(GLOBAL.ccConfig);
-
-
-//		GLOBAL.FXConfigController = new FX_ConfigController();
-//		TYP_GlobalFXRef FXNode_Controller = loadCenterContentsHelper(MyCenterPane, "/fxml/preferences/FX_Config.fxml", GLOBAL.ccConfig, GLOBAL.FXConfigController);
-//		GLOBAL.ccConfig = FXNode_Controller.MyParent;
-//		GLOBAL.FXConfigController = (FX_ConfigController) FXNode_Controller.MyController;
 	}
 
 	private void loadCenterContentsDB() {

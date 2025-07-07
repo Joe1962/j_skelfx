@@ -1,10 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright Joe1962
+ * https://github.com/Joe1962
  */
 package cu.jsoft.j_skelfx.statusbar;
 
+import cu.jsoft.j_skelfx.global.CONSTS;
 import static cu.jsoft.j_utilsfxlite.global.CONSTS.EMPTY_STRING;
 import static cu.jsoft.j_utilsfxlite.global.CONSTS.URL_LED22Green;
 import static cu.jsoft.j_utilsfxlite.global.CONSTS.URL_LED22Red;
@@ -24,7 +24,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import cu.jsoft.j_skelfx.global.CONSTS;
 
 /**
  * FXML Controller class
