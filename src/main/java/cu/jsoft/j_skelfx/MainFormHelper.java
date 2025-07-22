@@ -17,7 +17,9 @@ import static cu.jsoft.j_skelfx.MainForm.butOrders;
 import static cu.jsoft.j_skelfx.MainForm.butReports;
 import static cu.jsoft.j_skelfx.MainForm.butStock;
 import cu.jsoft.j_skelfx.global.CONSTS;
+import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
+import static cu.jsoft.j_skelfx.global.GLOBAL.DBCONFIG;
 import cu.jsoft.j_skelfx.global.TYP_GlobalFXRef;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.toFrontHelper;
 import java.io.IOException;
@@ -71,18 +73,18 @@ public class MainFormHelper {
 	}
 
 	public void setInitialStatusBarState() {
-//		if (FLAGS.isDBCONNECTED()) {
-//			if (FLAGS.isDBGLOADED()) {
-//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.GREEN);
-//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, false);
-//			} else {
-//				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.YELLOW);
-//				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME() + " pero error cargando...", 10, false);
-//			}
-//		} else {
+		if (FLAGS.isDBCONNECTED()) {
+			if (FLAGS.isDBGLOADED()) {
+				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.GREEN);
+				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, false);
+			} else {
+				GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.YELLOW);
+				GLOBAL.FXStatusBarController.setStatusText("Conectado a base de datos: " + DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME() + " pero error cargando...", 10, false);
+			}
+		} else {
 			GLOBAL.FXStatusBarController.setDBLED(CONSTS.LEDState.RED);
-//			GLOBAL.FXStatusBarController.setStatusText("ERROR conectando a Base de Datos: " + GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, true);
-//		}
+			GLOBAL.FXStatusBarController.setStatusText("ERROR conectando a Base de Datos: " + DBCONFIG.get(GLOBAL.DBDefaultDB).getDBNAME(), 10, true);
+	}
 	}
 
 	public void prepHomeButtons(MainFormController theMainFormController, VBox tlbLeft, VBox tlbRight) {
@@ -186,7 +188,6 @@ public class MainFormHelper {
 
 	public void loadCenterContentsAll(StackPane CenterPane) throws IOException {
 		this.MyCenterPane = CenterPane;
-		//GLOBAL.CenterPane = CenterPane;
 
 		loadCenterContentsLogo();
 		loadCenterContentsConfig();
@@ -250,8 +251,8 @@ public class MainFormHelper {
 
 	private void loadCenterContentsConfig() throws IOException {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/FX_Config.fxml"));
-		GLOBAL.FXConfigController = loader.getController();
 		GLOBAL.ccConfig = loader.load();
+		GLOBAL.FXConfigController = loader.getController();
 		GLOBAL.ccConfig.setOpacity(0);
 		GLOBAL.ccConfig.setId("tipConfig");
 		GLOBAL.CenterPane.getChildren().add(GLOBAL.ccConfig);
