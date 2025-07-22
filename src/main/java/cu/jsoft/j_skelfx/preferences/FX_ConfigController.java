@@ -5,9 +5,9 @@
  */
 package cu.jsoft.j_skelfx.preferences;
 
-import cu.jsoft.j_skelfx.preferences.db.FX_SysDBsController;
-import cu.jsoft.j_skelfx.preferences.system.FX_SysSystemController;
-import cu.jsoft.j_skelfx.preferences.users.FX_SysUsersController;
+import cu.jsoft.j_skelfx.preferences.db.FX_ConfigDBsController;
+import cu.jsoft.j_skelfx.preferences.system.FX_ConfigSystemController;
+import cu.jsoft.j_skelfx.preferences.users.FX_ConfigUsersController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,8 +27,15 @@ import javafx.scene.layout.BorderPane;
  */
 public class FX_ConfigController implements Initializable {
 
-	//<editor-fold defaultstate="collapsed" desc=" My class-level variables declaration ">
-	boolean flagLoadingTabs = false;
+	private boolean flagLoadingTabs = false;
+	private FX_ConfigSystemController ctlr_system;
+	private FX_ConfigDBsController ctlr_db;
+//	private FX_ConfigCostAreasController ctlr_cost_areas;
+//	private FX_ConfigCostCentersController ctlr_cost_centers;
+//	private FX_ConfigMenuGroupsController ctlr_menu_groups;
+//	private FX_ConfigCurrencyController ctlr_currency;
+//	private FX_ConfigUMController ctlr_units;
+	private FX_ConfigUsersController ctlr_users;
 
 	@FXML
 	private BorderPane tipConfig;
@@ -53,7 +60,6 @@ public class FX_ConfigController implements Initializable {
 
 	// Declare other tabs here...!!!
 
-	//</editor-fold>
 
 	/**
 	 * Initializes the controller class.
@@ -70,8 +76,18 @@ public class FX_ConfigController implements Initializable {
 		}
 //		stpConfig.setStyle(CONSTS.cssEtchedBorder);
 //		vbxButtons.setStyle(CONSTS.cssEtchedBorder);
-//		stpConfig.setStyle(CONSTS.cssEtchedBorder);
-//		vbxButtons.setStyle(CONSTS.cssEtchedBorder);
+	}
+
+	public void updateData() {
+		// TODO: call updateData on all dependent controllers...
+		ctlr_system.updateData();
+		ctlr_db.updateData();
+//		ctlr_cost_areas.updateData();
+//		ctlr_cost_centers.updateData();
+//		ctlr_menu_groups.updateData();
+//		ctlr_currency.updateData();
+//		ctlr_units.updateData();
+		ctlr_users.updateData();
 	}
 
 	public void setupTabs() throws IOException {
@@ -87,31 +103,55 @@ public class FX_ConfigController implements Initializable {
 	}
 
 	public Node getSystemNode() throws IOException {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/system/FX_SysSystem.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/system/FX_ConfigSystem.fxml"));
 		Node MyNode = loader.load();
-		FX_SysSystemController c = loader.getController();
-		c.updateData();
+		ctlr_system = loader.getController();
+		ctlr_system.updateData();
 		return MyNode;
 	}
 
 	public Node getDBNode() throws IOException {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/db/FX_SysDBs.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/db/FX_ConfigDBs.fxml"));
 		Node MyNode = loader.load();
-		FX_SysDBsController c = loader.getController();
+		ctlr_db = loader.getController();
+		ctlr_db.updateData();
 		return MyNode;
 	}
+
+	public Node getUsersNode() throws IOException {
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/users/FX_ConfigUsers.fxml"));
+		Node MyNode = loader.load();
+		ctlr_users = loader.getController();
+		ctlr_users.updateData();
+		return MyNode;
+	}
+
 
 	// Handle other nodes here...!!!
-	public Node getUsersNode() throws IOException {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/users/FX_SysUsers.fxml"));
-		Node MyNode = loader.load();
-		FX_SysUsersController c = loader.getController();
-		return MyNode;
-	}
-
 
 	private void setFirstConfigPanel() {
 
+	}
+
+	/**
+	 * @return the ctlr_system
+	 */
+	public FX_ConfigSystemController getCtlr_system() {
+		return ctlr_system;
+}
+
+	/**
+	 * @return the ctlr_db
+	 */
+	public FX_ConfigDBsController getCtlr_db() {
+		return ctlr_db;
+	}
+
+	/**
+	 * @return the ctlr_users
+	 */
+	public FX_ConfigUsersController getCtlr_users() {
+		return ctlr_users;
 	}
 
 }

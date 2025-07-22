@@ -28,7 +28,7 @@ import javafx.scene.input.ScrollEvent;
  *
  * @author informaticos
  */
-public class FX_SysDBController implements Initializable {
+public class FX_ConfigDBController implements Initializable {
 	private static SUB_Protect Protection = new SUB_Protect();
 	private final ObservableList<String> DBDriverList = FXCollections.observableArrayList("postgresql", "derby");
 	private CallbackForTabs myCallbackForTabs;

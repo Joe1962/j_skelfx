@@ -1,19 +1,20 @@
 skelfx TODO:
 
-TODO: Show sys_users GUI in preferences.
 
 ********************************************************************************
 
-- 250705:
-TODO: change SQL exception dialogs to SimpleDialog with collapsed content area (change required in j_dbfx-lite).
-- 250629:
-DONE: replace '$OWNER' substrings with 'skelfx' before showing tbl_sys_users.sql in error dialog.
-- 250627:
-DONE: MainForm.Login: handle IOException.
-DONE: check for sys_users table in DB, validate fields. On fail, tell user to create table (show SQL)...???
-- 250622:
-DONE: get rid of FX_Logo.fxml, it's just an empty StackPane, do it programatically.
-DONE: on startup, if DB connection fails, ask if configure DB or exit.
-DONE: on startup, check for DB config, if none, show DB config dialog.
+250722:
+	TODO: Show sys_users GUI in preferences.
+250705:
+	TODO: change SQL exception dialogs to SimpleDialog with collapsed content area (change required in j_dbfx-lite).
+250629:
+	DONE: replace '$OWNER' substrings with 'skelfx' before showing tbl_sys_users.sql in error dialog.
+250627:
+	DONE: MainForm.Login: handle IOException.
+	DONE: check for sys_users table in DB, validate fields. On fail, tell user to create table (show SQL)...???
+250622:
+	DONE: get rid of FX_Logo.fxml, it's just an empty StackPane, do it programatically.
+	DONE: on startup, if DB connection fails, ask if configure DB or exit.
+	DONE: on startup, check for DB config, if none, show DB config dialog.
 
 

@@ -10,13 +10,13 @@
 			<tabs>
 				<Tab fx:id="tabSystem" text="Sistema" />
 				<Tab fx:id="tabDB" text="Base de datos" />
+				<Tab fx:id="tabUsers" text="Usuarios" />
 				<Tab fx:id="tabPrinters" text="Impresoras" />
 				<Tab fx:id="tabCostArea" text="Areas de costo" />
 				<Tab fx:id="tabCostCenter" text="Centros de costo" />
 				<Tab fx:id="tabMenuGroups" text="Grupos del menú" />
 				<Tab fx:id="tabCurrency" text="Monedas" />
 				<Tab fx:id="tabUnits" text="Medidas" />
-				<Tab fx:id="tabUsers" text="Usuarios" />
 			</tabs>
 		</TabPane>
 	</center>

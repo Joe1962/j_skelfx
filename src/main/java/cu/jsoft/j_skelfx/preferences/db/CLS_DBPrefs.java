@@ -15,9 +15,9 @@ import javafx.scene.Node;
 public class CLS_DBPrefs {
 	
 	public Node getDBNode() throws IOException {
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/db/FX_SysDBs.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/preferences/db/FX_ConfigDBs.fxml"));
 		Node MyNode = loader.load();
-		FX_SysDBsController c = loader.getController();
+		FX_ConfigDBsController c = loader.getController();
 		return MyNode;
 	}
 

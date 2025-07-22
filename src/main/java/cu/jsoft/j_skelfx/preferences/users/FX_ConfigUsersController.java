@@ -7,18 +7,20 @@ package cu.jsoft.j_skelfx.preferences.users;
 import cu.jsoft.j_dbfxlite.exception.SQLx;
 import cu.jsoft.j_loginfx.users.RS_users;
 import cu.jsoft.j_loginfx.users.TYP_user;
+import cu.jsoft.j_skelfx.global.CONSTS;
 import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import cu.jsoft.j_skelfx.global.RunTime;
 import static cu.jsoft.j_skelfx.global.db2table.SUB_DB2Tables.setupTableView;
 import static cu.jsoft.j_utilsfxlite.global.CONSTS.EMPTY_STRING;
+import cu.jsoft.j_utilsfxlite.security.SUB_Protect;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorOKFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningYesNoFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsDateTime.JavaDate2SQLDate;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsDateTime.getTodayDate;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -43,25 +45,21 @@ import javafx.scene.control.TitledPane;
  *
  * @author joe1962
  */
-public class FX_SysUsersController implements Initializable {
-
+public class FX_ConfigUsersController implements Initializable {
 	//<editor-fold defaultstate="collapsed" desc=" My class-level variables declaration ">
 	RS_users RS = new RS_users();
-	ObservableList<TYP_SysUsersTableRow> lstMaster = FXCollections.observableArrayList();
+	ObservableList<TYP_ConfigUsersTableRow> lstMaster = FXCollections.observableArrayList();
+	HashMap<Integer, UUID> mapCorrelation = new HashMap<>();
 	boolean flagFillingInputs = false;
 
 	@FXML
 	private TitledPane tipUsers;
 	@FXML
-	private TableView<TYP_SysUsersTableRow> tblMaster;
+	private TableView<TYP_ConfigUsersTableRow> tblMaster;
 	@FXML
 	private TextField txfName;
 	@FXML
 	private CheckBox chkAdmin;
-	@FXML
-	private CheckBox chkActive;
-	@FXML
-	private TextField txfDateInactive;
 	@FXML
 	private Label lblConfirm;
 	@FXML
@@ -88,9 +86,10 @@ public class FX_SysUsersController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		RS.setDBConnHandler(GLOBAL.DBConnHandler);
 		try {
 			setupTableView(GLOBAL.DBConnHandler, tblMaster, "sys_users", RunTime.DebugMode);
-			fillTableMaster();
+			updateData();
 		} catch (SQLException ex) {
 			SQLx MySQLxHandler = new SQLx(GLOBAL.DBCONFIG.get(GLOBAL.DBDefaultDB), GLOBAL.MyLargeFontBold, GLOBAL.MyDefaultFont);
 			boolean retBool = MySQLxHandler.handleExceptionPG(ex, FLAGS.isDEBUG());
@@ -99,33 +98,30 @@ public class FX_SysUsersController implements Initializable {
 
 	public void updateData() {
 		try {
-			fillTableMaster();
+			// Fill the rows with lstMaster from sys_users:
+			lstMaster.clear();
+			tblMaster.getItems().clear();
+			tblMaster.setItems(lstMaster);
+			RS.setDBConnHandler(GLOBAL.DBConnHandler);
+			RS.selectAll(" ORDER BY name ");
+			boolean retBool = RS.goFirst();
+			mapCorrelation.clear();
+			int n = 0;
+			while (retBool) {
+				TYP_user MyTuple = RS.getCurrent();
+				mapCorrelation.put(n++, MyTuple.getUuid());
+				TYP_ConfigUsersTableRow MyTableRow = new TYP_ConfigUsersTableRow(MyTuple.getName(), MyTuple.isAdmin());
+				lstMaster.add(MyTableRow);
+				retBool = RS.goNext();
+			}
+
+			// Enable changelisteners:
+			setupChangeListeners();
+			// Enable selectionlisteners:
+			setupSelectionListeners();
 		} catch (SQLException ex) {
-			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+			System.getLogger(FX_ConfigUsersController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
 		}
-	}
-
-	private void fillTableMaster() throws SQLException {
-		// Fill the rows with lstMaster from sys_users:
-		lstMaster.clear();
-		tblMaster.getItems().clear();
-		//GLOBAL.RSSysCostAreas.selectAll(" ORDER BY cod ", RunTime.DebugMode);
-		tblMaster.setItems(lstMaster);
-		RS.setDBConnHandler(GLOBAL.DBConnHandler);
-		RS.selectAll(" ORDER BY name ");
-		boolean retBool = RS.goFirst();
-		while (retBool) {
-			TYP_user MyTuple = RS.getCurrent();
-			//TYP_SysUsersTableRow MyTableRow = new TYP_SysUsersTableRow(MyTuple.getUuid().toString(), MyTuple.getName(), MyTuple.isAdmin());
-			TYP_SysUsersTableRow MyTableRow = new TYP_SysUsersTableRow(MyTuple.getName(), MyTuple.isAdmin());
-			lstMaster.add(MyTableRow);
-			retBool = RS.goNext();
-		}
-
-		// Enable changelisteners:
-		setupChangeListeners();
-		// Enable selectionlisteners:
-		setupSelectionListeners();
 	}
 
 	private void setupChangeListeners() {
@@ -169,9 +165,9 @@ public class FX_SysUsersController implements Initializable {
 	}
 
 	private void setupSelectionListeners() {
-		tblMaster.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TYP_SysUsersTableRow>() {
+		tblMaster.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TYP_ConfigUsersTableRow>() {
 			@Override
-			public void changed(ObservableValue<? extends TYP_SysUsersTableRow> observable, TYP_SysUsersTableRow oldValue, TYP_SysUsersTableRow newValue) {
+			public void changed(ObservableValue<? extends TYP_ConfigUsersTableRow> observable, TYP_ConfigUsersTableRow oldValue, TYP_ConfigUsersTableRow newValue) {
 				if (newValue != null) {
 					// TODO: Fill input section from table row:
 					flagFillingInputs = true;
@@ -181,7 +177,7 @@ public class FX_SysUsersController implements Initializable {
 					flagFillingInputs = false;
 					butAdd.setDisable(false);
 					butDel.setDisable(false);
-					butSave.setDisable(true);
+					//butSave.setDisable(true);				// TODO: only do this in ChangeListeners...
 				} else {
 					butDel.setDisable(true);
 				}
@@ -194,7 +190,7 @@ public class FX_SysUsersController implements Initializable {
 				if (selCount == 1) {
 				}
 				if (selCount > 1) {
-					butSave.setDisable(true);
+					//butSave.setDisable(true);				// TODO: only do this in ChangeListeners...
 					butDel.setDisable(false);
 				}
 			}
@@ -205,53 +201,43 @@ public class FX_SysUsersController implements Initializable {
 		// Disable Add button to stop double input:
 		butAdd.setDisable(true);
 
-		// Get next cod:
-		int MyCod;
-//		try {
-//			MyCod = RS.getSequential(null, RunTime.DebugMode);
-//		} catch (SQLException ex) {
-//			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-//			// TODO: popup error dialog...
-//			return;
-//		}
-
 		//  Add new row to list:
-//		lstMaster.add(new TYP_SysUsersTableRow(MyCod, newName, isActive, isAdmin, inactive_date == null ? "" : inactive_date.toString()));
+		lstMaster.add(new TYP_ConfigUsersTableRow(newName, isAdmin));
 		// Prep record:
-//		TYP_SysUser MyRow = prepRecord(MyCod, newName, isActive, isAdmin, inactive_date, encryptedPass, userSalt);
-//		try {
-//			// Append to DB table:
-//			RS.appendRow(MyRow, RunTime.DebugMode);
-//		} catch (SQLException ex) {
-//			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-//		}
+		TYP_user MyRow = prepRecord(newName, isAdmin, passw);
+		try {
+			// Append to DB table:
+			RS.appendRow(MyRow);
+		} catch (SQLException ex) {
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+		}
 
 		clearInputSection();
+		updateData();
 	}
 
-	private void updateRowFromInputs(String newName, boolean isActive, boolean isAdmin, String passw) {
-//		// Get cod:
-//		int MyCod = tblMaster.getSelectionModel().getSelectedIndex();
-//
-//		//  Get ID from list:
-//		String tmpID = lstMaster.get(MyCod).getId();
-//		//  Replace row in list:
-//		lstMaster.set(MyCod, new TYP_SysUsersTableRow(tmpID, newName, isAdmin));
-//		// Prep record:
-//		TYP_user MyRow = prepRecord(tmpID, newName, isAdmin, passw);
-//		// Update DB table:
-//		try {
-//			RS.updateRow(MyRow, RunTime.DebugMode);
-//		} catch (SQLException ex) {
-//			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-//		}
-//
-//		clearInputSection();
+	private void updateRowFromInputs(String newName, boolean isAdmin, String passw) {
+		// Get table index:
+		int MyIndex = tblMaster.getSelectionModel().getSelectedIndex();
+
+		//  Replace row in list:
+		lstMaster.set(MyIndex, new TYP_ConfigUsersTableRow(newName, isAdmin));
+		// Prep record:
+		TYP_user MyRow = prepRecord(newName, isAdmin, passw);
+		// Update DB table:
+		String WhereParam = "uuid = '" + mapCorrelation.get(MyIndex) + "'";
+		try {
+			RS.updateRow(MyRow, WhereParam);
+		} catch (SQLException ex) {
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+		}
+
+		clearInputSection();
+		updateData();
 	}
 
-	private TYP_user prepRecord(String MyCod, String newName, boolean isAdmin, String passw) {
+	private TYP_user prepRecord(String newName, boolean isAdmin, String passw) {
 		TYP_user MyRow = new TYP_user();
-		MyRow.setUuid(UUID.fromString(MyCod));
 		MyRow.setName(newName);
 		MyRow.setAdmin(isAdmin);
 		MyRow.setPassword(passw);
@@ -261,9 +247,7 @@ public class FX_SysUsersController implements Initializable {
 	private void clearInputSection() {
 		// clear editing section:
 		txfName.clear();
-		chkActive.setSelected(false);
 		chkAdmin.setSelected(false);
-		txfDateInactive.clear();
 		chkPassword.setSelected(false);
 		pwdPassword.clear();
 		pwdConfirm.clear();
@@ -325,27 +309,15 @@ public class FX_SysUsersController implements Initializable {
 		pwdConfirm.setDisable(false);
 		lblPassword.setDisable(false);
 		lblConfirm.setDisable(false);
+		pwdPassword.requestFocus();
 	}
 
-	private void butSaveHelper(String passw) {
+	private void butSaveHelper(String encPass) {
 		Date tmpDate = null;
-		// TODO: check for user inactivation, ask for confirmation and then save inactive date...
-		if (!chkActive.isSelected()) {
-			boolean retBool = MsgWarningYesNoFX(GLOBAL.MainStage, null, "No ha marcado \"activo\":", "Seguro que desea inactivar este usuario?");
-			if (retBool) {
-				// TODO: change txfDate to datepicker and somehow decide if it was changed (set)
-				// otherwise, set today's date.
-				tmpDate = JavaDate2SQLDate(getTodayDate());
-				txfDateInactive.setText(tmpDate.toString());
-			} else {
-				txfDateInactive.clear();
-				return;
-			}
-		}
 		if (tblMaster.getSelectionModel().isEmpty()) {
-			appendRowFromInputs(txfName.getText(), chkAdmin.isSelected(), passw);
+			appendRowFromInputs(txfName.getText(), chkAdmin.isSelected(), encPass);
 		} else {
-			updateRowFromInputs(txfName.getText(), chkActive.isSelected(), chkAdmin.isSelected(), passw);
+			updateRowFromInputs(txfName.getText(), chkAdmin.isSelected(), encPass);
 		}
 	}
 
@@ -355,11 +327,6 @@ public class FX_SysUsersController implements Initializable {
 
 	@FXML
 	private void chkAdminOnActionHandler(ActionEvent event) {
-		checkFieldsForButtons();
-	}
-
-	@FXML
-	private void chkActiveOnActionHandler(ActionEvent event) {
 		checkFieldsForButtons();
 	}
 
@@ -377,9 +344,6 @@ public class FX_SysUsersController implements Initializable {
 
 	@FXML
 	private void butSaveOnActionHandler(ActionEvent event) {
-		byte[] userSalt = null;
-		byte[] encryptedPass = null;
-
 		butSave.setDisable(true);
 
 		if (pwdPassword.isDisabled()) {
@@ -387,8 +351,10 @@ public class FX_SysUsersController implements Initializable {
 		} else {
 			if (pwdPassword.getText().length() > 0 && pwdConfirm.getText().length() > 0) {
 				if (pwdPassword.getText().equals(pwdConfirm.getText())) {
-//					encryptedPass = SUB_PasswordHandler.genUserPass(pwdPassword.getText().toCharArray(), userSalt);
-//					butSaveHelper(passw);
+					// Encrypt password:
+					SUB_Protect Protection = new SUB_Protect();
+					String encPass = Protection.getEncryptedString(pwdPassword.getText(), new StringBuffer(CONSTS.AESSalt).reverse().toString(), new StringBuffer(CONSTS.SecKeyStr).reverse().toString(), CONSTS.iv);
+					butSaveHelper(encPass);
 				} else {
 					// TODO: Warning, passwords don't match...
 					MsgErrorOKFX(GLOBAL.MainStage, null, null, "El password no coincide con la confirmación...");
@@ -399,22 +365,19 @@ public class FX_SysUsersController implements Initializable {
 
 	@FXML
 	private void butDelOnActionHandler(ActionEvent event) {
-		ObservableList<TYP_SysUsersTableRow> listTMP = (ObservableList<TYP_SysUsersTableRow>) tblMaster.getSelectionModel().getSelectedItems();
-		if (listTMP.size() > 0) {
-			for (TYP_SysUsersTableRow obj : listTMP) {
+		ObservableList<TYP_ConfigUsersTableRow> listTMP = (ObservableList<TYP_ConfigUsersTableRow>) tblMaster.getSelectionModel().getSelectedItems();
+		if (!listTMP.isEmpty()) {
+			for (TYP_ConfigUsersTableRow obj : listTMP) {
+				int MyIndex = lstMaster.indexOf(obj);
 				lstMaster.remove(obj);
-//				try {
-//					RS.setMyCod(obj.getId());
-//					RS.deleteRow(RunTime.DebugMode);
-//				} catch (SQLException ex) {
-//					Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-//				}
+				RS.setUserID(mapCorrelation.get(MyIndex));
+				try {
+					RS.deleteRow();
+				} catch (SQLException ex) {
+					System.getLogger(FX_ConfigUsersController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+				}
 			}
 		}
-	}
-
-	@FXML
-	private void txfDateInactiveOnActionHandler(ActionEvent event) {
 	}
 
 	@FXML

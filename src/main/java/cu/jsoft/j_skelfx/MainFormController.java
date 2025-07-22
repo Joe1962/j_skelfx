@@ -6,6 +6,7 @@ package cu.jsoft.j_skelfx;
 
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import static cu.jsoft.j_skelfx.global.GLOBAL.WINDOWGEOM;
+import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgInfoOKFX;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.doFadeIn;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.doFadeInOut;
 import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.toFrontHelper;
@@ -22,8 +23,6 @@ import javafx.util.Duration;
  * @author joe1962
  */
 public class MainFormController implements Initializable {
-//	Node prevNode;
-//	Node currNode;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,12 +51,8 @@ public class MainFormController implements Initializable {
 		if (!GLOBAL.currNode.equals(GLOBAL.ccLogo)) {
 			GLOBAL.MainStage.setTitle(AppInfo.getTitleString());
 			if (GLOBAL.prevNode != null) System.out.println("pre prevnode: " + GLOBAL.prevNode.getId());
-			System.out.println("pre currnode: " + GLOBAL.currNode.getId());
 			GLOBAL.prevNode = GLOBAL.currNode;
 			GLOBAL.currNode = GLOBAL.ccLogo;
-			System.out.println("pos prevnode: " + GLOBAL.prevNode.getId());
-			System.out.println("pos currnode: " + GLOBAL.currNode.getId());
-			System.out.println("ccLogo ID: " + GLOBAL.ccLogo.getId());
 
 			doFadeInOut(GLOBAL.prevNode, GLOBAL.currNode, Duration.ZERO, Duration.seconds(0.5), Duration.ZERO, Duration.seconds(1));
 
@@ -67,6 +62,12 @@ public class MainFormController implements Initializable {
 	}
 
 	public void butConfigOnActionHandler(ActionEvent event) {
+		if (!GLOBAL.AdminUser) {
+			SUB_UtilsNotifications.doBeep();
+			MsgInfoOKFX(GLOBAL.MainStage, null, "", "Esta función requiere un administrador.");
+			return;
+		}
+
 		if (!GLOBAL.currNode.equals(GLOBAL.ccConfig)) {
 			GLOBAL.MainStage.setTitle(AppInfo.getTitleString() + " - Configuración");
 			if (GLOBAL.prevNode != null) System.out.println("pre prevnode: " + GLOBAL.prevNode.getId());
@@ -88,21 +89,19 @@ public class MainFormController implements Initializable {
 	public void butDBOnActionHandler(ActionEvent event) {
 //		HJRMSFX.setWindowTitle(AppInfo.getTitleString() + " - Mantenimiento a BD");
 
-		//run in background thread (REMOVE WHEN FUNCTIONAL):
-		new Thread() {
-
-			@Override
-			public void run() {
-				SUB_UtilsNotifications.doBeep();
-			}
-		;
-
-	}
-
-	.start();
+		SUB_UtilsNotifications.doBeep();
 
 //		HJRMSFX.CenterPane.getChildren().clear();
 //		HJRMSFX.CenterPane.getChildren().add(GLOBAL.ccDB);
+	}
+
+	public void butECROnActionHandler(ActionEvent event) {
+//		HJRMSFX.setWindowTitle(AppInfo.getTitleString() + " - ECRs");
+
+				SUB_UtilsNotifications.doBeep();
+
+//		HJRMSFX.CenterPane.getChildren().clear();
+//		HJRMSFX.CenterPane.getChildren().add(GLOBAL.ccECR);
 	}
 
 	// Handlers for other buttons go here...!!!

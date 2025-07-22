@@ -11,9 +11,9 @@ import atlantafx.base.theme.NordDark;
 import atlantafx.base.theme.NordLight;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
-import static cu.jsoft.j_dbfxlite.DBActions.getMyConn;
 import cu.jsoft.j_dbfxlite.DBConnectionHandler;
 import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
+import cu.jsoft.j_loginfx.users.RS_users;
 import cu.jsoft.j_loginfx.users.TYP_user;
 import cu.jsoft.j_skelfx.AppInfo;
 import cu.jsoft.j_skelfx.MainFormController;
@@ -62,6 +62,7 @@ public class GLOBAL {
 	public static TYP_WindowGeometry WINDOWGEOM = new TYP_WindowGeometry();
 	public static TYP_user MyUser = new TYP_user();
 	public static String CurrUser;
+	public static boolean AdminUser = false;
 	public static String LastUser;
 	public static Date TheDate = new Date();
 
@@ -314,7 +315,7 @@ public class GLOBAL {
 
 	public static boolean DBReconnect() throws SQLException {
 		try {
-			getMyConn().close();
+			DBConnHandler.getMyConn().close();
 		} catch (SQLException ex) {
 //			logLogger.log(Level.SEVERE, null, ex);
 		}
@@ -325,7 +326,7 @@ public class GLOBAL {
 	public static boolean DBValidOrReconnect() throws SQLException {
 		boolean DBConnValid;
 		try {
-			DBConnValid = getMyConn().isValid(5);
+			DBConnValid = DBConnHandler.getMyConn().isValid(5);
 		} catch (SQLException ex1) {
 //			logLogger.log(Level.SEVERE, null, ex1);
 			DBConnValid = false;
@@ -340,6 +341,16 @@ public class GLOBAL {
 	public static boolean loadGlobalRecordSets() {
 		
 		return false;
+	}
+
+	public static void updateAdminStatus() {
+		RS_users RS = new RS_users();
+		RS.setDBConnHandler(DBConnHandler);
+		try {
+			 AdminUser = RS.isAdminByname(CurrUser);
+		} catch (SQLException ex) {
+			System.getLogger(GLOBAL.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+		}
 	}
 
 	public static void doLogger(Exception ex, String mesg, Level MyLogLevel) {

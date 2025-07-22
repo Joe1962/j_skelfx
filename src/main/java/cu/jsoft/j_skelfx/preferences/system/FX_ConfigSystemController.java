@@ -26,7 +26,7 @@ import javafx.scene.input.ScrollEvent;
  *
  * @author joe1962
  */
-public class FX_SysSystemController implements Initializable {
+public class FX_ConfigSystemController implements Initializable {
 
 	//<editor-fold defaultstate="collapsed" desc=" My class-level variables declaration ">
 	@FXML

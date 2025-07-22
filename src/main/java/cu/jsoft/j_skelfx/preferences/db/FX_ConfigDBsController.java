@@ -29,9 +29,8 @@ import javafx.scene.control.TitledPane;
  *
  * @author joe1962
  */
-public class FX_SysDBsController implements Initializable, CallbackForTabs {
-	//FX_SysDBController nestedController;
-	HashMap<String, FX_SysDBController> nestedControllers = new HashMap<>();
+public class FX_ConfigDBsController implements Initializable, CallbackForTabs {
+	HashMap<String, FX_ConfigDBController> nestedControllers = new HashMap<>();
 	HashMap<String, TYP_ConfigDBJSON> DBConfigs = new HashMap<>();
 
 	@FXML
@@ -67,7 +66,7 @@ public class FX_SysDBsController implements Initializable, CallbackForTabs {
 		try {
 			setupTabConfigDBs();
 		} catch (IOException ex) {
-			Logger.getLogger(FX_SysDBsController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(FX_ConfigDBsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -115,13 +114,13 @@ public class FX_SysDBsController implements Initializable, CallbackForTabs {
 		DBConfigs.put(aDB.getDBNICK(), aDB);
 
 		// Load the nested FXML
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/preferences/db/FX_SysDB.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/preferences/db/FX_ConfigDB.fxml"));
 
 		// Load fxml and call loadData:
 		Parent content = loader.load();
 
 		// Get the nested controller
-		FX_SysDBController nestedController = loader.getController();
+		FX_ConfigDBController nestedController = loader.getController();
 
 		// Save nestedController to map:
 		nestedControllers.put(aDB.getDBNICK(), nestedController);
