@@ -461,6 +461,7 @@ public class MainForm extends Application {
 			FLAGS.setLOGGEDIN(true);
 			GLOBAL.LastUser = GLOBAL.CurrUser;
 			// TODO: Save LastUser to preferences...
+                        GLOBAL.updateAdminStatus();  //actualizar admin status luego del login
 			saveConfigJSON();
 		}
 	}

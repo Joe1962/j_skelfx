@@ -86,6 +86,7 @@ public class FX_ConfigUsersController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+      if (FLAGS.isDBCONNECTED()) {
 		RS.setDBConnHandler(GLOBAL.DBConnHandler);
 		try {
 			setupTableView(GLOBAL.DBConnHandler, tblMaster, "sys_users", RunTime.DebugMode);
@@ -95,8 +96,10 @@ public class FX_ConfigUsersController implements Initializable {
 			boolean retBool = MySQLxHandler.handleExceptionPG(ex, FLAGS.isDEBUG());
 		}
 	}
+   }
 
 	public void updateData() {
+      if (FLAGS.isDBCONNECTED()) {
 		try {
 			// Fill the rows with lstMaster from sys_users:
 			lstMaster.clear();
@@ -123,6 +126,7 @@ public class FX_ConfigUsersController implements Initializable {
 			System.getLogger(FX_ConfigUsersController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
 		}
 	}
+   }
 
 	private void setupChangeListeners() {
 		txfName.textProperty().addListener(new ChangeListener<String>() {
