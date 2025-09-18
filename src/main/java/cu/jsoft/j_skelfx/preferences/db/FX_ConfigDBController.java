@@ -9,7 +9,7 @@ import cu.jsoft.j_skelfx.global.CONSTS;
 import static cu.jsoft.j_skelfx.global.GLOBAL.DBCONFIG;
 import cu.jsoft.j_skelfx.global.interfaces.CallbackForTabs;
 import cu.jsoft.j_utilsfxlite.security.SUB_Protect;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.cmbOnScrollHandler;
+import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.setupComboBoxScrolling;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -70,6 +70,7 @@ public class FX_ConfigDBController implements Initializable {
 //		DBDriverList.add("Derby");
 		cmbDBType.setItems(DBDriverList);
 		cmbDBType.getSelectionModel().selectFirst();
+		setupComboBoxScrolling(cmbDBType);
 	}
 
 	public void loadData(TYP_ConfigDBJSON MyDBConfig) {
@@ -93,7 +94,6 @@ public class FX_ConfigDBController implements Initializable {
 
 	@FXML
 	private void cmbDBTypeOnScrollHandler(ScrollEvent event) {
-		cmbOnScrollHandler(event, cmbDBType);
 	}
 
 	@FXML
