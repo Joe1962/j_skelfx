@@ -4,9 +4,9 @@
  */
 package cu.jsoft.j_skelfx.global.db2table;
 
-import cu.jsoft.j_dbfxlite.RS;
-import cu.jsoft.j_utilsfxlite.global.FLAGS;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.echoClassMethodComment;
+import cu.jsoft.j_dbfx.RS;
+import cu.jsoft.j_utilsfx.global.FLAGS;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsNotifications.echoClassMethodComment;
 import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

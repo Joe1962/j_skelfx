@@ -21,7 +21,7 @@ import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import static cu.jsoft.j_skelfx.global.GLOBAL.DBCONFIG;
 import cu.jsoft.j_skelfx.global.TYP_GlobalFXRef;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.toFrontHelper;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.toFrontHelper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;

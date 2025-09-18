@@ -4,12 +4,12 @@
  */
 package cu.jsoft.j_skelfx.preferences.db;
 
-import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
+import cu.jsoft.j_dbfx.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import static cu.jsoft.j_skelfx.global.GLOBAL.DBCONFIG;
 import cu.jsoft.j_skelfx.global.interfaces.CallbackForTabs;
-import cu.jsoft.j_utilsfxlite.security.SUB_Protect;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.setupComboBoxScrolling;
+import cu.jsoft.j_utilsfx.security.SUB_Protect;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.setupComboBoxScrolling;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

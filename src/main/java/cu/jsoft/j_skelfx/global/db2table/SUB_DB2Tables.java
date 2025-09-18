@@ -4,9 +4,9 @@
  */
 package cu.jsoft.j_skelfx.global.db2table;
 
-import cu.jsoft.j_dbfxlite.DBConnectionHandler;
+import cu.jsoft.j_dbfx.DBConnectionHandler;
 import cu.jsoft.j_skelfx.global.CONSTS;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.getTableColumnTextAlignment;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.getTableColumnTextAlignment;
 import java.sql.SQLException;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;

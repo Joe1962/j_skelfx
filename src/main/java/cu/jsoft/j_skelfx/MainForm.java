@@ -4,7 +4,7 @@
  */
 package cu.jsoft.j_skelfx;
 
-import cu.jsoft.j_dbfxlite.exception.SQLx;
+import cu.jsoft.j_dbfx.exception.SQLx;
 import cu.jsoft.j_loginfx.LoginMain;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import cu.jsoft.j_skelfx.global.FLAGS;
@@ -17,16 +17,16 @@ import cu.jsoft.j_skelfx.global.RunTime;
 import static cu.jsoft.j_skelfx.preferences.CLS_Preferences.loadConfigJSON;
 import static cu.jsoft.j_skelfx.preferences.CLS_Preferences.saveConfigJSON;
 import cu.jsoft.j_skelfx.preferences.db.CLS_DBPrefs;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.NEW_LINE;
-import static cu.jsoft.j_utilsfxlite.global.FLAGS.isDEBUG;
-import static cu.jsoft.j_utilsfxlite.global.FLAGS.setBEEPAVAILABLE;
-import cu.jsoft.j_utilsfxlite.networking.SingleInstance;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorYesNoFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningOKFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgWarningYesNoFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.SimpleDialog;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.echoln;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications.setupBeep;
+import static cu.jsoft.j_utilsfx.global.CONSTS.NEW_LINE;
+import static cu.jsoft.j_utilsfx.global.FLAGS.isDEBUG;
+import static cu.jsoft.j_utilsfx.global.FLAGS.setBEEPAVAILABLE;
+import cu.jsoft.j_utilsfx.networking.SingleInstance;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.MsgErrorYesNoFX;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.MsgWarningOKFX;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.MsgWarningYesNoFX;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.SimpleDialog;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsNotifications.echoln;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsNotifications.setupBeep;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.SQLException;

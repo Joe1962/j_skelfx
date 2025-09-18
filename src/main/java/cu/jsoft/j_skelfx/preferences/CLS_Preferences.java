@@ -4,13 +4,13 @@
  */
 package cu.jsoft.j_skelfx.preferences;
 
-import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
+import cu.jsoft.j_dbfx.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.AppInfo;
 import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import static cu.jsoft.j_skelfx.global.GLOBAL.WINDOWGEOM;
-import cu.jsoft.j_utilsfxlite.interfaces.SettingsHandlerJSON;
-import cu.jsoft.j_utilsfxlite.preferences.SUB_SettingsHandlerJSON;
+import cu.jsoft.j_utilsfx.interfaces.SettingsHandlerJSON;
+import cu.jsoft.j_utilsfx.preferences.SUB_SettingsHandlerJSON;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;

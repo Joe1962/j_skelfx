@@ -5,7 +5,7 @@
 package cu.jsoft.j_skelfx.preferences.system;
 
 import cu.jsoft.j_skelfx.global.GLOBAL;
-import cu.jsoft.j_utilsfxlite.global.FLAGS;
+import cu.jsoft.j_utilsfx.global.FLAGS;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

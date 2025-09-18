@@ -6,11 +6,11 @@ package cu.jsoft.j_skelfx;
 
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import static cu.jsoft.j_skelfx.global.GLOBAL.WINDOWGEOM;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgInfoOKFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.doFadeIn;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.doFadeInOut;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsFX.toFrontHelper;
-import cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.MsgInfoOKFX;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.doFadeIn;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.doFadeInOut;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsFX.toFrontHelper;
+import cu.jsoft.j_utilsfx.subs.SUB_UtilsNotifications;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;

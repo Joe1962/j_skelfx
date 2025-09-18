@@ -4,7 +4,7 @@
  */
 package cu.jsoft.j_skelfx.preferences.db;
 
-import cu.jsoft.j_dbfxlite.types.TYP_ConfigDBJSON;
+import cu.jsoft.j_dbfx.types.TYP_ConfigDBJSON;
 import cu.jsoft.j_skelfx.global.CONSTS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import cu.jsoft.j_skelfx.global.interfaces.CallbackForTabs;

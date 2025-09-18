@@ -4,7 +4,7 @@
  */
 package cu.jsoft.j_skelfx.preferences.users;
 
-import cu.jsoft.j_dbfxlite.exception.SQLx;
+import cu.jsoft.j_dbfx.exception.SQLx;
 import cu.jsoft.j_loginfx.users.RS_users;
 import cu.jsoft.j_loginfx.users.TYP_user;
 import cu.jsoft.j_skelfx.global.CONSTS;
@@ -12,11 +12,11 @@ import cu.jsoft.j_skelfx.global.FLAGS;
 import cu.jsoft.j_skelfx.global.GLOBAL;
 import cu.jsoft.j_skelfx.global.RunTime;
 import static cu.jsoft.j_skelfx.global.db2table.SUB_DB2Tables.setupTableView;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.EMPTY_STRING;
-import cu.jsoft.j_utilsfxlite.security.SUB_Protect;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_PopupsFX.MsgErrorOKFX;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsDateTime.JavaDate2SQLDate;
-import static cu.jsoft.j_utilsfxlite.subs.SUB_UtilsDateTime.getTodayDate;
+import static cu.jsoft.j_utilsfx.global.CONSTS.EMPTY_STRING;
+import cu.jsoft.j_utilsfx.security.SUB_Protect;
+import static cu.jsoft.j_utilsfx.subs.SUB_PopupsFX.MsgErrorOKFX;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsDateTime.JavaDate2SQLDate;
+import static cu.jsoft.j_utilsfx.subs.SUB_UtilsDateTime.getTodayDate;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;

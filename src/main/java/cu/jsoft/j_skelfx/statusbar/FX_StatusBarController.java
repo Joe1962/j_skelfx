@@ -5,11 +5,11 @@
 package cu.jsoft.j_skelfx.statusbar;
 
 import cu.jsoft.j_skelfx.global.CONSTS;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.EMPTY_STRING;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.URL_LED22Green;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.URL_LED22Red;
-import static cu.jsoft.j_utilsfxlite.global.CONSTS.URL_LED22Yellow;
-import cu.jsoft.j_utilsfxlite.subs.SUB_UtilsNotifications;
+import static cu.jsoft.j_utilsfx.global.CONSTS.EMPTY_STRING;
+import static cu.jsoft.j_utilsfx.global.CONSTS.URL_LED22Green;
+import static cu.jsoft.j_utilsfx.global.CONSTS.URL_LED22Red;
+import static cu.jsoft.j_utilsfx.global.CONSTS.URL_LED22Yellow;
+import cu.jsoft.j_utilsfx.subs.SUB_UtilsNotifications;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;

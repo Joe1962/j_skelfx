@@ -10,7 +10,7 @@ import jakarta.xml.bind.DatatypeConverter;
  *
  * @author joe1962
  */
-public class CONSTS extends cu.jsoft.j_utilsfxlite.global.CONSTS {
+public class CONSTS extends cu.jsoft.j_utilsfx.global.CONSTS {
 	
 	// GLOBAL DEFAULT CONSTANTS:
 	public static final String DEFAULTDBDRIVER = "jdbc";

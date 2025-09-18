@@ -8,7 +8,7 @@ package cu.jsoft.j_skelfx.global;
  *
  * @author joe1962
  */
-public class FLAGS extends cu.jsoft.j_utilsfxlite.global.FLAGS {
+public class FLAGS extends cu.jsoft.j_utilsfx.global.FLAGS {
 
 	// DB FLAGS:
 	private static boolean DBCONNECTED;
