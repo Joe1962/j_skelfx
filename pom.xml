@@ -32,24 +32,24 @@
         </dependency>
         <dependency>
             <groupId>cu.jsoft</groupId>
-            <artifactId>j_dbfx-lite</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cu.jsoft</groupId>
             <artifactId>j_loginfx</artifactId>
             <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cu.jsoft</groupId>
-            <artifactId>j_utilsfx-lite</artifactId>
-            <version>1.4.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.17.2</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>cu.jsoft</groupId>
+            <artifactId>j_dbfx</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cu.jsoft</groupId>
+            <artifactId>j_utilsfx</artifactId>
+            <version>1.4.1</version>
         </dependency>
     </dependencies>
     <properties>
