@@ -374,9 +374,9 @@ public class FX_ConfigUsersController implements Initializable {
 			for (TYP_ConfigUsersTableRow obj : listTMP) {
 				int MyIndex = lstMaster.indexOf(obj);
 				lstMaster.remove(obj);
-				RS.setUserID(mapCorrelation.get(MyIndex));
+				UUID uID = mapCorrelation.get(MyIndex);
 				try {
-					RS.deleteRow();
+					RS.deleteRowBySingleField("uuid", uID.toString());
 				} catch (SQLException ex) {
 					System.getLogger(FX_ConfigUsersController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
 				}
